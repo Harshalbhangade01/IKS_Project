@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedic Mathematics Calculator</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --dark-bg: #120118;
+            --primary-purple: #8A2BE2; 
+            --light-purple: #c58af9;
+            --glow-color: rgba(138, 43, 226, 0.75);
+            --text-color: #f0f0f0;
+            --header-height: 70px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+
+.language-switcher {
+    margin-left: auto; 
+    margin-right: 2rem;
+}
+
+.language-switcher a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 18px;
+        right: 70px; 
+        margin: 0;
+    }
+    .language-switcher a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding-top: var(--header-height);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(138, 43, 226, 0) 60%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        
+        header {
+            background: rgba(18, 1, 24, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-color); text-decoration: none; text-shadow: 0 0 5px var(--glow-color); }
+        .logo i { color: var(--primary-purple); margin-right: 0.5rem; }
+        .nav-menu { display: flex; list-style-type: none; gap: 2rem; }
+        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; position: relative; padding: 0.5rem 0; transition: color 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--light-purple); }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--primary-purple); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--text-color); }
+
+        
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .calculator-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .main-heading {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--light-purple);
+            text-shadow: 0 0 15px var(--glow-color);
+            margin-bottom: 2rem;
+        }
+        
+        
+        .calculator-body {
+            background: rgba(26, 2, 38, 0.7);
+            border: 2px solid var(--primary-purple);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 0 40px var(--glow-color);
+            backdrop-filter: blur(10px);
+        }
+
+        
+        .calculator-display {
+            background: #000;
+            border: 1px solid var(--primary-purple);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: right;
+            font-family: 'Orbitron', sans-serif;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .previous-operand {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            min-height: 24px;
+        }
+
+        .current-operand {
+            color: white;
+            font-size: 2.5rem;
+            min-height: 48px;
+        }
+
+        
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .calculator-buttons button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            padding: 1rem 0;
+            background: rgba(18, 1, 24, 0.6);
+            color: var(--text-color);
+            border: 1px solid var(--primary-purple);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calculator-buttons button:hover {
+            background: var(--primary-purple);
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+        
+        .calculator-buttons button:active {
+            transform: scale(0.95);
+        }
+
+        .span-two {
+            grid-column: span 2;
+        }
+        
+        .operator {
+            color: var(--light-purple);
+        }
+
+        .equals {
+            background: var(--primary-purple);
+        }
+        .equals:hover {
+            background: var(--light-purple);
+        }
+        
+        
+        #explanation-panel {
+            background: rgba(26, 2, 38, 0.7);
+            border: 1px solid var(--primary-purple);
+            border-radius: 15px;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            display: none; /* Initially hidden */
+            text-align: left;
+        }
+
+        #explanation-panel h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--light-purple);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--primary-purple);
+            padding-bottom: 0.5rem;
+        }
+        
+        #explanation-panel p {
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        #explanation-panel code {
+            font-family: 'Courier New', Courier, monospace;
+            background: #000;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            color: var(--light-purple);
+        }
+
+        
+        footer {
+            background: rgba(18, 1, 24, 0.9);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            color: #ccc;
+        }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .footer-column { flex: 1; min-width: 200px; }
+        .footer-column h3 { color: var(--light-purple); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--primary-purple); }
+
+        
+        @media (max-width: 768px) {
+            .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background: #1a0226; width: 100%; text-align: center; transition: left 0.3s ease; gap: 0; }
+            .nav-menu.active { left: 0; }
+            .nav-item { border-bottom: 1px solid rgba(138, 43, 226, 0.2); }
+            .nav-link { display: block; padding: 1.5rem; }
+            .hamburger { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-square-root-alt"></i> Zero Stress Maths</a>
+            <div class="language-switcher">
+    <a href="hindicalculator.html">हिन्दी</a>
+</div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="formulas.html" class="nav-link">Formulas</a></li>
+                <li class="nav-item"><a href="game.html" class="nav-link">Games</a></li>
+                <li class="nav-item"><a href="cal.html" class="nav-link active">Calculator</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="calculator-container">
+                <h1 class="main-heading">Vedic Calculator</h1>
+                <div class="calculator-body">
+                    <div class="calculator-display">
+                        <div class="previous-operand" data-previous-operand></div>
+                        <div class="current-operand" data-current-operand></div>
+                    </div>
+                    <div class="calculator-buttons">
+                        <button class="span-two" data-all-clear>AC</button>
+                        <button data-delete>DEL</button>
+                        <button class="operator" data-operation>÷</button>
+                        <button data-number>1</button>
+                        <button data-number>2</button>
+                        <button data-number>3</button>
+                        <button class="operator" data-operation>×</button>
+                        <button data-number>4</button>
+                        <button data-number>5</button>
+                        <button data-number>6</button>
+                        <button class="operator" data-operation>+</button>
+                        <button data-number>7</button>
+                        <button data-number>8</button>
+                        <button data-number>9</button>
+                        <button class="operator" data-operation>-</button>
+                        <button data-number>.</button>
+                        <button data-number>0</button>
+                        <button class="span-two equals" data-equals>=</button>
+                    </div>
+                </div>
+
+                <div id="explanation-panel">
+                    <h3 id="explanation-title"></h3>
+                    <div id="explanation-content"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Zero Stress Maths</h3>
+                    <p>Ancient mathematical techniques from the Vedas that simplify complex calculations.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="formulas.html">Formulas</a></li>
+                        <li><a href="game.html">Games</a></li>
+                        <li><a href="cal.html">Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+        
+        class Calculator {
+            constructor(previousOperandTextElement, currentOperandTextElement) {
+                this.previousOperandTextElement = previousOperandTextElement;
+                this.currentOperandTextElement = currentOperandTextElement;
+                this.explanationPanel = document.getElementById('explanation-panel');
+                this.explanationTitle = document.getElementById('explanation-title');
+                this.explanationContent = document.getElementById('explanation-content');
+                this.clear();
+            }
+
+            clear() {
+                this.currentOperand = '';
+                this.previousOperand = '';
+                this.operation = undefined;
+                this.explanationPanel.style.display = 'none';
+            }
+
+            delete() {
+                this.currentOperand = this.currentOperand.toString().slice(0, -1);
+            }
+
+            appendNumber(number) {
+                if (number === '.' && this.currentOperand.includes('.')) return;
+                this.currentOperand = this.currentOperand.toString() + number.toString();
+            }
+
+            chooseOperation(operation) {
+                if (this.currentOperand === '') return;
+                if (this.previousOperand !== '') {
+                    this.compute();
+                }
+                this.operation = operation;
+                this.previousOperand = this.currentOperand;
+                this.currentOperand = '';
+            }
+            
+            vedicMultiply(num1Str, num2Str) {
+            
+                if (num1Str.length === 2 && num2Str.length === 2) {
+                    const a = parseInt(num1Str[0]);
+                    const b = parseInt(num1Str[1]);
+                    const c = parseInt(num2Str[0]);
+                    const d = parseInt(num2Str[1]);
+
+                    const step1_val = b * d;
+                    const step2_val = (a * d) + (b * c);
+                    const step3_val = a * c;
+
+                    const right = step1_val % 10;
+                    const carry1 = Math.floor(step1_val / 10);
+                    
+                    const middle_sum = step2_val + carry1;
+                    const middle = middle_sum % 10;
+                    const carry2 = Math.floor(middle_sum / 10);
+
+                    const left = step3_val + carry2;
+                    
+                    const result = parseInt(`${left}${middle}${right}`);
+
+                    
+                    this.explanationTitle.innerText = `Vedic Method: ${num1Str} × ${num2Str} (Urdhva Tiryagbhyam)`;
+                    this.explanationContent.innerHTML = `
+                        <p>This multiplication uses the 'Vertically and Crosswise' method.</p>
+                        <p><b>Step 1 (Vertically Right):</b> Multiply the right-most digits. <code>${b} × ${d} = ${step1_val}</code>. Write down <code>${right}</code> and carry over <code>${carry1}</code>.</p>
+                        <p><b>Step 2 (Crosswise):</b> Multiply diagonally and add. <code>(${a}×${d}) + (${b}×${c}) = ${a*d} + ${b*c} = ${step2_val}</code>. Add carry-over: <code>${step2_val} + ${carry1} = ${middle_sum}</code>. Write down <code>${middle}</code> and carry over <code>${carry2}</code>.</p>
+                        <p><b>Step 3 (Vertically Left):</b> Multiply the left-most digits. <code>${a} × ${c} = ${step3_val}</code>. Add carry-over: <code>${step3_val} + ${carry2} = ${left}</code>.</p>
+                        <p><b>Result:</b> Combining the digits from left to right gives <code>${result}</code>.</p>
+                    `;
+                    this.explanationPanel.style.display = 'block';
+
+                    return result;
+                }
+                
+                this.explanationPanel.style.display = 'none';
+                return parseFloat(num1Str) * parseFloat(num2Str);
+            }
+
+            compute() {
+                let computation;
+                const prev = parseFloat(this.previousOperand);
+                const current = parseFloat(this.currentOperand);
+                if (isNaN(prev) || isNaN(current)) return;
+
+                switch (this.operation) {
+                    case '+':
+                        computation = prev + current;
+                        this.explanationPanel.style.display = 'none';
+                        break;
+                    case '-':
+                        computation = prev - current;
+                        this.explanationPanel.style.display = 'none';
+                        break;
+                    case '×':
+                        computation = this.vedicMultiply(this.previousOperand, this.currentOperand);
+                        break;
+                    case '÷':
+                        computation = prev / current;
+                        this.explanationPanel.style.display = 'none';
+                        break;
+                    default:
+                        return;
+                }
+                this.currentOperand = computation;
+                this.operation = undefined;
+                this.previousOperand = '';
+            }
+
+            getDisplayNumber(number) {
+                const stringNumber = number.toString();
+                const integerDigits = parseFloat(stringNumber.split('.')[0]);
+                const decimalDigits = stringNumber.split('.')[1];
+                let integerDisplay;
+                if (isNaN(integerDigits)) {
+                    integerDisplay = '';
+                } else {
+                    integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 });
+                }
+                if (decimalDigits != null) {
+                    return `${integerDisplay}.${decimalDigits}`;
+                } else {
+                    return integerDisplay;
+                }
+            }
+
+            updateDisplay() {
+                this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
+                if (this.operation != null) {
+                    this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
+                } else {
+                    this.previousOperandTextElement.innerText = '';
+                }
+            }
+        }
+
+        const numberButtons = document.querySelectorAll('[data-number]');
+        const operationButtons = document.querySelectorAll('[data-operation]');
+        const equalsButton = document.querySelector('[data-equals]');
+        const deleteButton = document.querySelector('[data-delete]');
+        const allClearButton = document.querySelector('[data-all-clear]');
+        const previousOperandTextElement = document.querySelector('[data-previous-operand]');
+        const currentOperandTextElement = document.querySelector('[data-current-operand]');
+
+        const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
+
+        numberButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                calculator.appendNumber(button.innerText);
+                calculator.updateDisplay();
+            });
+        });
+
+        operationButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                calculator.chooseOperation(button.innerText);
+                calculator.updateDisplay();
+            });
+        });
+
+        equalsButton.addEventListener('click', button => {
+            calculator.compute();
+            calculator.updateDisplay();
+        });
+
+        allClearButton.addEventListener('click', button => {
+            calculator.clear();
+            calculator.updateDisplay();
+        });
+
+        deleteButton.addEventListener('click', button => {
+            calculator.delete();
+            calculator.updateDisplay();
+        });
+    </script>
+</body>
+</html>

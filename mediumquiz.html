@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medium Vedic Maths Quiz</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --dark-bg: #120118;
+            --primary-purple: #8A2BE2;
+            --light-purple: #c58af9;
+            --glow-color: rgba(138, 43, 226, 0.75);
+            --text-color: #f0f0f0;
+            --header-height: 70px;
+            --correct-green: #388e3c;
+            --wrong-red: #d32f2f;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding-top: var(--header-height);
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        header {
+            background: rgba(18, 1, 24, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-color); text-decoration: none; text-shadow: 0 0 5px var(--glow-color); }
+        .logo i { color: var(--primary-purple); margin-right: 0.5rem; }
+        .nav-menu { display: flex; list-style-type: none; gap: 2rem; }
+        .nav-link { color: var(--text-color); text-decoration: none; transition: color 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--light-purple); }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+        main { display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - var(--header-height) - 180px); padding: 4rem 0; }
+        .quiz-card { background: rgba(26, 2, 38, 0.7); border: 2px solid var(--primary-purple); border-radius: 15px; padding: 2.5rem; width: 100%; max-width: 700px; box-shadow: 0 0 30px var(--glow-color); }
+        .quiz-card h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--light-purple); margin-bottom: 2rem; text-align: center; }
+        .question-container { margin-bottom: 2rem; text-align: left; }
+        .question-number { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--primary-purple); margin-bottom: 0.5rem; }
+        .question-text { font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.4; }
+        .options label { display: block; background: rgba(40, 5, 60, 0.6); border: 1px solid var(--primary-purple); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1rem; cursor: pointer; transition: background 0.3s ease, border-color 0.3s ease; display: flex; align-items: center; }
+        .options label:hover:not(.disabled) { background: rgba(60, 10, 80, 0.7); border-color: var(--light-purple); }
+        .options label.disabled { cursor: not-allowed; opacity: 0.7; }
+        .options input[type="radio"] { margin-right: 1rem; transform: scale(1.2); accent-color: var(--primary-purple); }
+        .options label.correct { background-color: rgba(56, 142, 60, 0.3); border-color: var(--correct-green); }
+        .options label.wrong { background-color: rgba(211, 47, 47, 0.3); border-color: var(--wrong-red); }
+        .feedback { margin-top: 1.5rem; padding: 1rem; border-radius: 8px; text-align: left; border: 1px solid transparent; }
+        .feedback.correct { background-color: rgba(56, 142, 60, 0.2); border-color: var(--correct-green); color: var(--correct-green); }
+        .feedback.wrong { background-color: rgba(211, 47, 47, 0.2); border-color: var(--wrong-red); color: var(--wrong-red); }
+        .explanation-heading { font-weight: 600; margin-bottom: 0.5rem; color: var(--light-purple); }
+        .explanation-text { font-size: 0.95rem; line-height: 1.6; }
+        /* Add this CSS inside your <style> tag */
+
+.language-switcher {
+    margin-left: auto; /* Pushes the switcher to the right */
+    margin-right: 2rem;
+}
+
+.language-switcher a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Adjust for mobile view */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 18px;
+        right: 70px; /* Position it next to the hamburger icon */
+        margin: 0;
+    }
+    .language-switcher a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+        .controls { display: flex; justify-content: flex-end; margin-top: 2rem; }
+        .btn { background-color: var(--primary-purple); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        .btn:hover:not(:disabled) { background-color: var(--light-purple); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4); }
+        .result-screen { text-align: center; }
+        .result-screen h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--light-purple); margin-bottom: 1.5rem; }
+        .score { font-size: 3rem; font-weight: 700; color: var(--primary-purple); text-shadow: 0 0 15px var(--glow-color); margin-bottom: 2rem; }
+        .retake-btn { background-color: var(--primary-purple); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
+        footer { background: rgba(18, 1, 24, 0.9); padding: 2.5rem 0; border-top: 1px solid rgba(138, 43, 226, 0.3); color: #ccc; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .footer-column { flex: 1; min-width: 200px; }
+        .footer-column h3 { color: var(--light-purple); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--primary-purple); }
+        @media (max-width: 768px) {
+            .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background: #1a0226; width: 100%; text-align: center; transition: left 0.3s ease; gap: 0; }
+            .nav-menu.active { left: 0; }
+            .nav-item { border-bottom: 1px solid rgba(138, 43, 226, 0.2); }
+            .nav-link { display: block; padding: 1.5rem; }
+            .hamburger { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-square-root-alt"></i> Zero Stress Maths</a>
+            <div class="language-switcher">
+    <a href="hindimediumquiz.html">हिन्दी</a>
+</div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="formulas.html" class="nav-link">Formulas</a></li>
+                <li class="nav-item"><a href="game.html" class="nav-link active">Games</a></li>
+                <li class="nav-item"><a href="cal.html" class="nav-link">Calculator</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="quiz-card">
+                <h1 id="quiz-title">Medium Vedic Maths Quiz</h1>
+                
+                <div id="quiz-content">
+                    <div class="question-container">
+                        <p class="question-number">Question <span id="current-question-num">1</span> of <span id="total-questions">10</span></p>
+                        <p class="question-text" id="question-text"></p>
+                        <div class="options" id="options-container"></div>
+                    </div>
+                    
+                    <div class="feedback" id="feedback-container" style="display: none;"></div>
+
+                    <div class="controls">
+                        <button class="btn" id="next-action-btn" style="display: none;"></button>
+                    </div>
+                </div>
+
+                <div id="result-screen" class="result-screen" style="display: none;">
+                    <h2>Quiz Completed!</h2>
+                    <p>Your Score: <span class="score" id="final-score">0/10</span></p>
+                    <button class="retake-btn" onclick="location.reload()">Retake Quiz</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Zero Stress Maths</h3>
+                    <p>Ancient mathematical techniques from the Vedas that simplify complex calculations.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="formulas.html">Formulas</a></li>
+                        <li><a href="game.html">Games</a></li>
+                        <li><a href="cal.html">Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // --- QUIZ LOGIC WITH MEDIUM QUESTIONS ---
+        const questions = [
+            { question: "Using 'Urdhva Tiryagbhyam', calculate 32 x 41.", options: ["1212", "1312", "1412", "1282"], answer: "1312", explanation: "Vertically and Crosswise: Right: 2×1=2. Middle: (3×1)+(2×4)=3+8=11 (write 1, carry 1). Left: 3×4=12. Add carry: 12+1=13. Result: 1312." },
+            { question: "Using 'Nikhilam' for numbers above the base, calculate 103 x 104.", options: ["10712", "10612", "10710", "11712"], answer: "10712", explanation: "Base 100. Surpluses are +3 and +4. Right part: 3×4=12. Left part: 103+4=107 (or 104+3=107). Result: 10712." },
+            { question: "Using 'Ekanyunena Purvena', calculate 78 x 99.", options: ["7722", "7821", "7721", "7822"], answer: "7722", explanation: "For multiplying by 99: Left part: 78-1=77. Right part: 100-78=22. Result: 7722." },
+            { question: "Using the 'Nikhilam' sutra, what is the square of 96?", options: ["9216", "9116", "9236", "9316"], answer: "9216", explanation: "Base 100. Deficiency is 4. Left part: 96-4=92. Right part: square of deficiency, 4²=16. Result: 9216." },
+            { question: "Calculate 214 x 111.", options: ["23754", "22754", "23654", "24754"], answer: "23754", explanation: "For multiplying by 111: Right: 4. Next: 4+1=5. Middle: 4+1+2=7. Next: 1+2=3. Left: 2. Result: 23754." },
+            { question: "The sutra 'Paravartya Yojayet' is a method for what operation?", options: ["Squaring", "Division", "Cubing", "Finding square roots"], answer: "Division", explanation: "'Paravartya Yojayet' means 'Transpose and Apply'. It is a method for dividing numbers, especially when the divisor is slightly larger than a base number (like 11, 12, 103, etc.)." },
+            { question: "What is the result of 43 x 47 using 'Ekadhikena Purvena'?", options: ["2021", "2011", "1621", "2024"], answer: "2021", explanation: "The first digits are the same (4) and last digits sum to 10 (3+7=10). Right part: 3×7=21. Left part: 4 × (4+1) = 4×5=20. Result: 2021." },
+            { question: "Divide 1235 by 12 using the 'Nikhilam' division method.", options: ["Quotient: 102, Remainder: 11", "Quotient: 103, Remainder: -1", "Quotient: 102, Remainder: 1", "Quotient: 103, Remainder: 1"], answer: "Quotient: 102, Remainder: 11", explanation: "This is a more complex application. The result of the Nikhilam division process gives a quotient of 102 and a final remainder of 11." },
+            { question: "Using 'Urdhva Tiryagbhyam', calculate 56 x 23.", options: ["1288", "1278", "1188", "1388"], answer: "1288", explanation: "Right: 6×3=18 (write 8, carry 1). Middle: (5×3)+(6×2)=15+12=27. Add carry: 27+1=28 (write 8, carry 2). Left: 5×2=10. Add carry: 10+2=12. Result: 1288." },
+            { question: "What is the square of 115?", options: ["13225", "12225", "13125", "13255"], answer: "13225", explanation: "For squaring numbers ending in 5. Right part is always 25. Left part: take the number before 5 (11) and multiply by one more than it (12). 11 × 12 = 132. Result: 13225." }
+        ];
+        
+        // State variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // DOM Elements
+        const questionTextElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackContainer = document.getElementById('feedback-container');
+        const currentQuestionNum = document.getElementById('current-question-num');
+        const totalQuestions = document.getElementById('total-questions');
+        const nextActionButton = document.getElementById('next-action-btn'); // Single button for control
+        const quizContent = document.getElementById('quiz-content');
+        const resultScreen = document.getElementById('result-screen');
+        const finalScore = document.getElementById('final-score');
+
+        totalQuestions.textContent = questions.length;
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            if (!q) return;
+
+            currentQuestionNum.textContent = currentQuestionIndex + 1;
+            questionTextElement.textContent = q.question;
+            
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextActionButton.style.display = 'none';
+
+            q.options.forEach(option => {
+                const label = document.createElement('label');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'quiz-option';
+                input.value = option;
+                
+                input.addEventListener('change', () => handleOptionSelect(option));
+
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(option));
+                optionsContainer.appendChild(label);
+            });
+        }
+
+        function handleOptionSelect(selectedValue) {
+            optionsContainer.querySelectorAll('input').forEach(input => {
+                input.disabled = true;
+                input.parentElement.classList.add('disabled');
+            });
+
+            const q = questions[currentQuestionIndex];
+            const isCorrect = selectedValue === q.answer;
+
+            if (isCorrect) score++;
+
+            optionsContainer.querySelectorAll('label').forEach(label => {
+                if (label.querySelector('input').value === q.answer) {
+                    label.classList.add('correct');
+                } else if (label.querySelector('input').value === selectedValue) {
+                    label.classList.add('wrong');
+                }
+            });
+
+            feedbackContainer.innerHTML = `<p class="explanation-heading">${isCorrect ? 'Correct! 🎉' : 'Wrong! The correct answer was: ' + q.answer}</p><p class="explanation-text">${q.explanation}</p>`;
+            feedbackContainer.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
+            feedbackContainer.style.display = 'block';
+
+            setTimeout(() => {
+                if (currentQuestionIndex < questions.length - 1) {
+                    nextActionButton.textContent = 'Next Question';
+                } else {
+                    nextActionButton.textContent = 'Submit Quiz';
+                }
+                nextActionButton.style.display = 'block';
+            }, 1500);
+        }
+
+        function handleNextAction() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                showResultScreen();
+            }
+        }
+
+        function showResultScreen() {
+            quizContent.style.display = 'none';
+            resultScreen.style.display = 'block';
+            finalScore.textContent = `${score}/${questions.length}`;
+        }
+
+        // Attach the single event listener
+        nextActionButton.addEventListener('click', handleNextAction);
+
+        // Initial load
+        loadQuestion();
+    </script>
+
+</body>
+</html>

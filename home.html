@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>वैदिक गणित - आधुनिक मन के लिए प्राचीन ज्ञान</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --dark-bg: #120118;
+            --primary-purple: #8A2BE2;
+            --light-purple: #c58af9;
+            --glow-color: rgba(138, 43, 226, 0.75);
+            --text-color: #f0f0f0;
+            --header-height: 70px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%);
+            color: var(--text-color);
+            padding-top: var(--header-height);
+        }
+        /* Add this CSS inside your <style> tag */
+
+.language-switcher {
+    margin-left: auto; /* Pushes the switcher to the right */
+    margin-right: 2rem;
+}
+
+.language-switcher a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Adjust for mobile view */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 18px;
+        right: 70px; /* Position it next to the hamburger icon */
+        margin: 0;
+    }
+    .language-switcher a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+        body::before { content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(138, 43, 226, 0) 60%); animation: rotateGlow 20s linear infinite; z-index: -1; }
+        @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        header { background: rgba(18, 1, 24, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(138, 43, 226, 0.3); position: fixed; top: 0; left: 0; width: 100%; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-color); text-decoration: none; text-shadow: 0 0 5px var(--glow-color); }
+        .logo i { color: var(--primary-purple); margin-right: 0.5rem; }
+        .nav-menu { display: flex; list-style-type: none; gap: 2rem; }
+        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; position: relative; padding: 0.5rem 0; transition: color 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--light-purple); }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--primary-purple); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--text-color); }
+        .hero { display: flex; align-items: center; justify-content: center; text-align: center; min-height: calc(100vh - var(--header-height)); background: linear-gradient(rgba(18, 1, 24, 0.7), rgba(18, 1, 24, 0.9)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cg fill="%238A2BE2" fill-opacity="0.05"%3E%3Crect x="0" y="0" width="50" height="50"/%3E%3Crect x="50" y="50" width="50" height="50"/%3E%3C/g%3E%3C/svg%3E'); }
+        .hero-content h1 { font-family: 'Orbitron', sans-serif; font-size: 4rem; text-shadow: 0 0 20px var(--glow-color); margin-bottom: 1rem; }
+        .hero-content p { font-size: 1.3rem; color: var(--light-purple); margin-bottom: 2rem; }
+        .btn { display: inline-block; background-color: var(--primary-purple); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1.1rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 0 15px var(--glow-color); }
+        .btn:hover { background-color: var(--light-purple); transform: translateY(-3px); box-shadow: 0 0 25px var(--glow-color); }
+        .section { padding: 4rem 0; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--light-purple); margin-bottom: 0.5rem; }
+        .history-content { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+        .history-text { flex: 1; min-width: 300px; }
+        .history-text p { margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.1rem; }
+        .history-image { flex: 1; min-width: 300px; text-align: center; }
+        .history-image img { max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 0 25px rgba(138, 43, 226, 0.4); }
+        .features { background: rgba(26, 2, 38, 0.4); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .feature-card { background: rgba(26, 2, 38, 0.7); border: 2px solid var(--primary-purple); border-radius: 15px; padding: 2rem; text-align: center; backdrop-filter: blur(5px); transition: box-shadow 0.3s ease, transform 0.3s ease; }
+        .feature-card:hover { box-shadow: 0 0 25px var(--glow-color); transform: translateY(-10px); }
+        .feature-icon { font-size: 3rem; color: var(--primary-purple); text-shadow: 0 0 15px var(--glow-color); margin-bottom: 1rem; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--light-purple); }
+        .feature-card p { line-height: 1.7; }
+        footer { background: rgba(18, 1, 24, 0.9); padding: 2.5rem 0; border-top: 1px solid rgba(138, 43, 226, 0.3); color: #ccc; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .footer-column { flex: 1; min-width: 200px; }
+        .footer-column h3 { color: var(--light-purple); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--primary-purple); }
+        @media (max-width: 768px) { .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background: #1a0226; width: 100%; text-align: center; transition: left 0.3s ease; gap: 0; } .nav-menu.active { left: 0; } .nav-item { border-bottom: 1px solid rgba(138, 43, 226, 0.2); } .nav-link { display: block; padding: 1.5rem; } .hamburger { display: block; } .hero-content h1 { font-size: 3rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="home.html" class="logo"><i class="fas fa-square-root-alt"></i> तनाव मुक्त गणित</a>
+            <div class="language-switcher">
+    <a href="index.html">English</a>
+</div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link active">होम</a></li>
+                <li class="nav-item"><a href="hindiformula.html" class="nav-link">सूत्र</a></li>
+                <li class="nav-item"><a href="hindigame.html" class="nav-link">गेम</a></li>
+                <li class="nav-item"><a href="hindicalculator.html" class="nav-link">कैलकुलेटर</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>वैदिक गणित</h1>
+            <p>आधुनिक दुनिया के लिए प्राचीन गणितीय ज्ञान</p>
+            <a href="hindiformula.html" class="btn">सूत्रों का अन्वेषण करें</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>वैदिक गणित का इतिहास</h2>
+            </div>
+            <div class="history-content">
+                <div class="history-text">
+                    <p>वैदिक गणित, गणित की एक ऐसी प्रणाली है जिसे प्राचीन भारतीय ग्रंथों, वेदों से फिर से खोजा गया था, जो 1500 ईसा पूर्व या उससे पहले के हैं। "वैदिक" शब्द इसी वैदिक आधार को संदर्भित करता है।</p>
+                    <p>इस प्रणाली को श्री भारती कृष्ण तीर्थजी (1884-1960) द्वारा फिर से खोजा गया था, जो पुरी, भारत में गोवर्धन मठ के शंकराचार्य थे। तीर्थजी के अनुसार, संपूर्ण गणित सोलह सूत्रों और तेरह उप-सूत्रों पर आधारित है।</p>
+                    <p>ये सूत्र सरल और आसानी से याद रखने वाले प्रारूप में गणितीय समस्याओं की एक पूरी श्रृंखला को हल करने के प्राकृतिक तरीकों का वर्णन करते हैं। कहा जाता है कि वैदिक गणित प्राकृतिक मन की कार्यप्रणाली पर आधारित है और यह गणित के लिए एक नया दृष्टिकोण प्रस्तुत करता है।</p>
+                    <p>पारंपरिक गणित के विपरीत, जिसका दृष्टिकोण रैखिक है, वैदिक गणित एक ही समस्या के लिए कई गणना विधियाँ प्रदान करता है, जिससे व्यक्तियों को वह विधि चुनने की अनुमति मिलती है जो उनके लिए सबसे अच्छा काम करती है।</p>
+                </div>
+                <div class="history-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='300' viewBox='0 0 500 300'%3E%3Crect width='500' height='300' fill='%23120118'/%3E%3Cpath d='M100,150 Q150,50 200,150 T300,150 T400,150' stroke='%238a2be2' stroke-width='3' fill='none' stroke-dasharray='5,5' opacity='0.5'/%3E%3Ccircle cx='100' cy='150' r='10' fill='%239b4dff'/%3E%3Ccircle cx='200' cy='150' r='10' fill='%239b4dff'/%3E%3Ccircle cx='300' cy='150' r='10' fill='%239b4dff'/%3E%3Ccircle cx='400' cy='150' r='10' fill='%239b4dff'/%3E%3Ctext x='250' y='220' font-family='Orbitron, sans-serif' font-size='24' fill='%23e0e0e0' text-anchor='middle'%3EAncient Wisdom%3C/text%3E%3C/svg%3E" alt="वैदिक गणित का विज़ुअलाइज़ेशन">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section features">
+        <div class="container">
+            <div class="section-title">
+                <h2>वैदिक गणित ही क्यों?</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>मानसिक गणना</h3>
+                    <p>वैदिक गणित की तकनीकें जटिल गणनाओं को कागज या कैलकुलेटर की आवश्यकता के बिना मानसिक रूप से करने में सक्षम बनाती हैं।</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>तेज परिणाम</h3>
+                    <p>पारंपरिक तरीकों की तुलना में गणना बहुत तेजी से की जा सकती है, जिससे समय और मेहनत की बचत होती है।</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>रचनात्मकता में सुधार</h3>
+                    <p>समस्या-समाधान के कई दृष्टिकोण रचनात्मक और लचीली सोच को प्रोत्साहित करते हैं।</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>सीखने में आसान</h3>
+                    <p>वैदिक गणित सरल नियमों और सिद्धांतों पर आधारित है जिन्हें समझना और लागू करना आसान है।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>तनाव मुक्त गणित</h3>
+                    <p>वेदों से प्राचीन गणितीय तकनीकें जो जटिल गणनाओं को सरल बनाती हैं।</p>
+                </div>
+                <div class="footer-column">
+                    <h3>अन्वेषण करें</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">होम</a></li>
+                        <li><a href="hindiformula.html">सूत्र</a></li>
+                        <li><a href="hindigame.html">गेम</a></li>
+                        <li><a href="hindicalculator.html">कैलकुलेटर</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

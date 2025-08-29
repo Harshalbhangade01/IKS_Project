@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>वैदिक मैथ्स गेम्स</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --dark-bg: #120118;
+            --primary-purple: #8A2BE2; /* BlueViolet */
+            --light-purple: #c58af9;
+            --glow-color: rgba(138, 43, 226, 0.75);
+            --text-color: #f0f0f0;
+            --header-height: 70px;
+            --success: #00c853;
+            --warning: #ffab00;
+            --error: #cf6679;
+            --border-color: rgba(138, 43, 226, 0.4);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: var(--header-height);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(138, 43, 226, 0) 60%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        /* Header & Footer */
+        .container-fluid { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        header { background: rgba(18, 1, 24, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-color); text-decoration: none; text-shadow: 0 0 5px var(--glow-color); }
+        .logo i { color: var(--primary-purple); margin-right: 0.5rem; }
+        .nav-menu { display: flex; list-style-type: none; gap: 2rem; }
+        .nav-link { color: var(--text-color); text-decoration: none; font-family: 'Poppins', sans-serif;}
+        .nav-link.active { color: var(--light-purple); font-weight: bold;}
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+        footer { background: rgba(18, 1, 24, 0.9); padding: 2.5rem 0; border-top: 1px solid var(--border-color); color: #ccc; margin-top: 4rem; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .footer-column { flex: 1; min-width: 200px; }
+        .footer-column h3 { color: var(--light-purple); margin-bottom: 1rem; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--primary-purple); }
+
+        /* Language Switcher */
+        .language-switcher { margin-left: auto; margin-right: 2rem; }
+        .language-switcher a { color: var(--text-color); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border: 1px solid var(--primary-purple); border-radius: 8px; transition: all 0.3s ease; font-family: 'Poppins', sans-serif; }
+        .language-switcher a:hover { background-color: var(--primary-purple); color: white; box-shadow: 0 0 10px var(--glow-color); }
+
+        /* Main Game Container */
+        .main-container { padding: 4rem 1.5rem; }
+        .container {
+            background: rgba(26, 2, 38, 0.7);
+            border: 2px solid var(--primary-purple);
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--glow-color);
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            margin: 0 auto;
+        }
+        
+        h1 { font-size: 2.8rem; background: linear-gradient(90deg, var(--light-purple), var(--primary-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        
+        /* Tabs & Level Selectors */
+        .tabs { display: flex; justify-content: center; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab { padding: 10px 25px; background-color: transparent; border: 1px solid var(--primary-purple); border-radius: 25px; margin: 0 10px 10px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: var(--transition); color: var(--text-color); }
+        .tab.active { background: linear-gradient(to bottom, var(--primary-purple), #6a1cb9); color: white; transform: scale(1.05); border-color: var(--primary-purple); }
+        .tab:hover:not(.active) { background-color: rgba(138, 43, 226, 0.2); }
+        .level-selector { margin-bottom: 20px; display: flex; justify-content: center; flex-wrap: wrap; }
+        .level-btn { padding: 8px 20px; margin: 0 8px 8px; border: 1px solid var(--light-purple); background: transparent; color: var(--light-purple); border-radius: 20px; cursor: pointer; transition: var(--transition); font-weight: 600; }
+        .level-btn.active { background: var(--light-purple); color: var(--dark-bg); box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3); }
+        .level-btn:hover:not(.active) { background-color: rgba(138, 43, 226, 0.1); }
+        
+        /* Game Content Area */
+        .game-container { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 25px; min-height: 400px; border: 1px solid var(--border-color); position: relative; }
+        .game-content { margin-top: 30px; }
+        .quiz-question { font-size: 1.8rem; margin-bottom: 25px; color: var(--text-color); font-weight: 600; }
+        .quiz-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
+        .option { padding: 15px; background: rgba(18, 1, 24, 0.8); border: 2px solid var(--border-color); border-radius: 10px; cursor: pointer; font-size: 1.2rem; transition: var(--transition); }
+        .option:hover { background: rgba(40, 5, 60, 0.8); transform: translateY(-2px); border-color: var(--primary-purple); }
+        .option.correct { background: linear-gradient(to bottom, var(--success), #00b34a); color: white; border-color: var(--success); }
+        .option.incorrect { background: linear-gradient(to bottom, var(--error), #c2185b); color: white; border-color: var(--error); }
+        .next-btn { padding: 12px 30px; background: linear-gradient(to bottom, var(--primary-purple), #6a1cb9); color: white; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; transition: var(--transition); font-weight: 600; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); }
+        .next-btn:hover { background: linear-gradient(to bottom, var(--light-purple), var(--primary-purple)); transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); }
+        .score { font-size: 1.2rem; margin-top: 20px; color: var(--text-color); font-weight: 500; }
+        .sutra-info { margin-top: 20px; padding: 15px; background: rgba(138, 43, 226, 0.1); border-radius: 10px; font-size: 1rem; line-height: 1.7; color: var(--light-purple); border-left: 4px solid var(--primary-purple); text-align: left;}
+        
+        /* Memory Game */
+        .memory-game { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .memory-card { aspect-ratio: 1 / 1; perspective: 1000px; background-color: transparent; border: none; cursor: pointer; }
+        .memory-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .memory-card.flipped .memory-card-inner { transform: rotateY(180deg); }
+        .front-face, .back-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px; text-align: center; padding: 8px; overflow: hidden; }
+        .front-face { background: linear-gradient(to bottom, var(--primary-purple), #6a1cb9); color: white; font-size: 2.5rem; }
+        .back-face { background: rgba(255, 255, 255, 0.9); color: var(--dark-bg); transform: rotateY(180deg); font-weight: 600; font-size: 0.9rem; }
+        .back-face small { font-size: 0.75rem; font-weight: 400; margin-top: 4px; }
+        
+        /* UI Elements */
+        .sound-control { position: fixed; top: 85px; right: 20px; background: rgba(26, 2, 38, 0.7); border: 1px solid var(--border-color); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; }
+        .timer-container { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.5); padding: 8px 15px; border-radius: 20px; font-size: 1rem; font-weight: 600; border: 1px solid var(--border-color); display: flex; align-items: center; }
+        .timer { margin-left: 8px; color: var(--light-purple); min-width: 50px; text-align: center; }
+        .timer.warning { color: var(--warning); }
+        .timer.danger { color: var(--error); animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .hidden { display: none; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background: #1a0226; width: 100%; text-align: center; transition: left 0.3s ease; gap: 0; }
+            .nav-menu.active { left: 0; }
+            .nav-item { border-bottom: 1px solid var(--border-color); }
+            .nav-link { display: block; padding: 1.5rem; }
+            .hamburger { display: block; }
+            .quiz-options { grid-template-columns: 1fr; }
+            .memory-game { grid-template-columns: repeat(4, 1fr); }
+            h1 { font-size: 2.2rem; }
+            .language-switcher { position: absolute; top: 18px; right: 70px; margin: 0; }
+            .language-switcher a { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid nav-container">
+            <a href="home.html" class="logo"><i class="fas fa-square-root-alt"></i> तनाव मुक्त गणित</a>
+            <div class="language-switcher">
+                <a href="game.html">English</a>
+            </div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link">होम</a></li>
+                <li class="nav-item"><a href="hindiformula.html" class="nav-link">सूत्र</a></li>
+                <li class="nav-item"><a href="hindigame.html" class="nav-link active">गेम</a></li>
+                <li class="nav-item"><a href="hindicalculator.html" class="nav-link">कैलकुलेटर</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="sound-control" id="soundToggle" onclick="toggleSound()">
+            <span id="soundIcon">🔊</span>
+        </div>
+    
+        <div class="container">
+            <h1>वैदिक मैथ्स गेम्स</h1>
+    
+            <div class="tabs">
+                <button class="tab active" onclick="showGame('quiz')">क्विज़ गेम</button>
+                <button class="tab" onclick="showGame('memory')">मेमोरी गेम</button>
+            </div>
+    
+            <div class="level-selector">
+                <button class="level-btn active" onclick="setLevel('easy')">आसान</button>
+                <button class="level-btn" onclick="setLevel('average')">मध्यम</button>
+                <button class="level-btn" onclick="setLevel('hard')">कठिन</button>
+            </div>
+    
+            <div class="game-container">
+                <div class="timer-container">
+                    समय: <span id="timer" class="timer">00:00</span>
+                </div>
+    
+                <div id="quiz-game" class="game-content">
+                    <div class="quiz-question" id="question">12 × 13 क्या है?</div>
+                    <div class="quiz-options">
+                        <div class="option" onclick="checkAnswer(this)">156</div>
+                        <div class="option" onclick="checkAnswer(this)">144</div>
+                        <div class="option" onclick="checkAnswer(this)">168</div>
+                        <div class="option" onclick="checkAnswer(this)">136</div>
+                    </div>
+                    <button class="next-btn hidden" onclick="nextQuestion()">अगला प्रश्न</button>
+                    <div class="score">स्कोर: <span id="score">0</span></div>
+                    <div class="sutra-info" id="sutra-info" style="display: none;"></div>
+                </div>
+    
+                <div id="memory-game" class="game-content hidden">
+                    <div class="memory-game" id="memory-cards"></div>
+                    <div class="score">जोड़ियां मिलीं: <span id="pairs-found">0</span> / 8</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container-fluid">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>तनाव मुक्त गणित</h3>
+                    <p>वेदों से प्राचीन गणितीय तकनीकें जो जटिल गणनाओं को सरल बनाती हैं।</p>
+                </div>
+                <div class="footer-column">
+                    <h3>अन्वेषण करें</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">होम</a></li>
+                        <li><a href="hindiformula.html">सूत्र</a></li>
+                        <li><a href="hindigame.html">गेम</a></li>
+                        <li><a href="hindicalculator.html">कैलकुलेटर</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+
+        let currentLevel = 'easy';
+        let currentGame = 'quiz';
+        let score = 0;
+        let currentQuestion = 0;
+       
+        let flippedCards = [], matchedPairs = 0, soundEnabled = true, audioContext, timerInterval, timeLeft, gameActive = false, lockBoard = false;
+        const timeLimits = { quiz: { easy: 30, average: 25, hard: 20 }, memory: { easy: 120, average: 90, hard: 60 } };
+        function initAudio() { try { audioContext = new(window.AudioContext || window.webkitAudioContext)(); } catch (e) { console.error('Web Audio API is not supported'); soundEnabled = false; document.getElementById('soundIcon').textContent = '🔇'; } }
+        function toggleSound() { soundEnabled = !soundEnabled; document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇'; if (soundEnabled) playSound('toggle'); }
+        function playSound(type) { if (!soundEnabled || !audioContext) return; const o = audioContext.createOscillator(), g = audioContext.createGain(); o.connect(g); g.connect(audioContext.destination); switch (type) { case 'correct': o.type = 'sine'; o.frequency.setValueAtTime(523.25, audioContext.currentTime); o.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); g.gain.setValueAtTime(0.3, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3); o.start(); o.stop(audioContext.currentTime + 0.3); break; case 'incorrect': o.type = 'sawtooth'; o.frequency.setValueAtTime(349.23, audioContext.currentTime); g.gain.setValueAtTime(0.3, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4); o.start(); o.stop(audioContext.currentTime + 0.4); break; case 'complete': o.type = 'sine'; o.frequency.setValueAtTime(523.25, audioContext.currentTime); o.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.3); g.gain.setValueAtTime(0.3, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5); o.start(); o.stop(audioContext.currentTime + 0.5); break; case 'flip': o.type = 'sine'; o.frequency.setValueAtTime(329.63, audioContext.currentTime + 0.1); g.gain.setValueAtTime(0.2, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2); o.start(); o.stop(audioContext.currentTime + 0.2); break; case 'match': o.type = 'sine'; o.frequency.setValueAtTime(783.99, audioContext.currentTime); o.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.1); g.gain.setValueAtTime(0.3, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3); o.start(); o.stop(audioContext.currentTime + 0.3); break; case 'toggle': o.type = 'sine'; o.frequency.setValueAtTime(392.00, audioContext.currentTime); g.gain.setValueAtTime(0.2, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1); o.start(); o.stop(audioContext.currentTime + 0.1); break; case 'time-warning': o.type = 'sawtooth'; o.frequency.setValueAtTime(440, audioContext.currentTime); g.gain.setValueAtTime(0.3, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5); o.start(); o.stop(audioContext.currentTime + 0.5); break; } }
+        function startTimer() { clearInterval(timerInterval); const t = document.getElementById('timer'); timeLeft = timeLimits[currentGame][currentLevel]; updateTimerDisplay(); gameActive = true; timerInterval = setInterval(() => { timeLeft--; updateTimerDisplay(); if (timeLeft <= 10) { t.classList.add('danger'); t.classList.remove('warning'); if (timeLeft > 0) playSound('time-warning'); } else if (timeLeft <= 30) { t.classList.add('warning'); t.classList.remove('danger'); } else { t.classList.remove('warning', 'danger'); } if (timeLeft <= 0) { clearInterval(timerInterval); gameActive = false; handleTimeUp(); } }, 1000); }
+        function updateTimerDisplay() { const m = Math.floor(timeLeft / 60), s = timeLeft % 60; document.getElementById('timer').textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`; }
+        function handleTimeUp() { if (currentGame === 'quiz') { const q = quizQuestions[currentLevel]; document.getElementById('question').textContent = `समय समाप्त! आपका स्कोर: ${score}/${q.length}`; document.getElementById('sutra-info').style.display = 'block'; document.getElementById('sutra-info').textContent = "अपना समय सुधारने के लिए फिर से प्रयास करें!"; document.querySelector('#quiz-game .quiz-options').innerHTML = ''; document.querySelector('#quiz-game .next-btn').textContent = 'क्विज़ फिर से शुरू करें'; playSound('incorrect'); } else if (currentGame === 'memory') { alert("समय समाप्त! आप समय पर सभी जोड़ियों को नहीं ढूंढ पाए।"); showGame('memory'); } }
+        function stopTimer() { clearInterval(timerInterval); gameActive = false; document.getElementById('timer').classList.remove('warning', 'danger'); }
+        const quizQuestions = {
+            easy: [
+                { question: "25 × 25 क्या है?", options: ["625", "525", "650", "600"], answer: "625", sutra: "एकाधिकेन पूर्वेण", explanation: "5 पर समाप्त होने वाली संख्याओं के लिए, पहले अंक (2) को उसके अगले अंक (3) से गुणा करें (2x3=6)। फिर अंत में 25 लगा दें। परिणाम: 625।" }, 
+                { question: "1000 - 357 क्या है?", options: ["643", "743", "653", "753"], answer: "643", sutra: "निखिलं नवतश्चरमं दशतः", explanation: "सभी अंकों को 9 से और अंतिम अंक को 10 से घटाएं। (9-3)=6, (9-5)=4, (10-7)=3। परिणाम: 643।" }, 
+                { question: "43 x 11 क्या है?", options: ["473", "463", "483", "373"], answer: "473", sutra: "11 से गुणा", explanation: "अंतिम अंक (3) लिखें। दोनों अंकों को जोड़ें (4+3=7)। पहला अंक (4) लिखें। परिणाम: 473।" }
+            ],
+            average: [
+                { question: "98 x 97 क्या है?", options: ["9506", "9606", "9504", "9406"], answer: "9506", sutra: "निखिलं (आधार 100)", explanation: "100 से कमियाँ 2 और 3 हैं। बायां भाग: 98-3=95। दायां भाग: 2x3=06। परिणाम: 9506।" }, 
+                { question: "32 x 41 क्या है?", options: ["1312", "1212", "1322", "1412"], answer: "1312", sutra: "ऊर्ध्व-तिर्यग्भ्याम्", explanation: "दाएँ: 2×1=2। मध्य: (3×1)+(2×4)=11 (1, हासिल 1)। बाएँ: 3×4=12। 12+1=13। परिणाम: 1312।" }, 
+                { question: "103 x 105 क्या है?", options: ["10815", "10715", "10816", "10915"], answer: "10815", sutra: "निखिलं (आधार से ऊपर)", explanation: "100 से अधिशेष 3 और 5 हैं। बायां भाग: 103+5=108। दायां भाग: 3x5=15। परिणाम: 10815।" }
+            ],
+            hard: [
+                { question: "123 × 321 क्या है?", options: ["39483", "39473", "38483", "39583"], answer: "39483", sutra: "ऊर्ध्व-तिर्यग्भ्याम् (3x3)", explanation: "एक 5-चरणीय ऊर्ध्वाधर और तिरछी गुणन प्रक्रिया परिणाम देती है। यह 2x2 विधि का विस्तार है।" }, 
+                { question: "998 का वर्ग क्या है?", options: ["996004", "998004", "996008", "986004"], answer: "996004", sutra: "यावदूनम् (वर्ग)", explanation: "1000 से कमी 2 है। बायां भाग: 998-2=996। दायां भाग: 2²=004 (आधार 1000 के लिए 3 अंक)। परिणाम: 996004।" }, 
+                { question: "103 का घन क्या है?", options: ["1092727", "1092627", "1082727", "1092729"], answer: "1092727", sutra: "यावदूनम् (घन)", explanation: "अधिशेष 3 है। सूत्र (संख्या + 2*अधिशेष) / 3*(अधिशेष)² / (अधिशेष)³ से 109 / 27 / 27 प्राप्त होता है। परिणाम: 1092727।" }
+            ]
+        };
+        const sutras = [ { name: "Ekadhikena Purvena", meaning: "पहले वाले से एक अधिक द्वारा" }, { name: "Nikhilam...", meaning: "सभी 9 से और अंतिम 10 से" }, { name: "Urdhva-Tiryagbhyam", meaning: "लंबवत और तिरछे" }, { name: "Paraavartya Yojayet", meaning: "विपरीत करके समायोजित करें" }, { name: "Shunyam Saamyasamuccaye", meaning: "जब योग समान हो, तो वह योग शून्य होता है" }, { name: "Anurupye...", meaning: "यदि एक अनुपात में है, तो दूसरा शून्य है" }, { name: "Sankalana...", meaning: "जोड़ और घटाव द्वारा" }, { name: "Puranapuranabyham", meaning: "पूर्णता या अपूर्णता द्वारा" } ];
+        function initGame() { initAudio(); updateLevelButtons(); showGame(currentGame); }
+        function showGame(game) { stopTimer(); document.getElementById('quiz-game').classList.add('hidden'); document.getElementById('memory-game').classList.add('hidden'); document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.getElementById(`${game}-game`).classList.remove('hidden'); document.querySelector(`.tab[onclick="showGame('${game}')"]`).classList.add('active'); currentGame = game; if (game === 'quiz') { resetQuiz(); } else { setupMemoryGame(); } }
+        function setLevel(level) { currentLevel = level; updateLevelButtons(); showGame(currentGame); playSound('flip'); }
+        function updateLevelButtons() { document.querySelectorAll('.level-btn').forEach(btn => { const level_map = { 'आसान': 'easy', 'मध्यम': 'average', 'कठिन': 'hard' }; btn.classList.toggle('active', level_map[btn.textContent] === currentLevel); }); }
+        function loadQuestion() { const qData = quizQuestions[currentLevel][currentQuestion]; const sInfo = document.getElementById('sutra-info'); document.getElementById('question').textContent = qData.question; sInfo.style.display = 'none'; sInfo.innerHTML = ''; document.querySelectorAll('#quiz-game .option').forEach((opt, idx) => { opt.textContent = qData.options[idx]; opt.className = 'option'; }); document.querySelector('#quiz-game .next-btn').classList.add('hidden'); }
+        function resetQuiz() { score = 0; currentQuestion = 0; document.getElementById('score').textContent = score; const opts = document.querySelector('#quiz-game .quiz-options'); if (opts.children.length === 0) { opts.innerHTML = `<div class="option" onclick="checkAnswer(this)"></div><div class="option" onclick="checkAnswer(this)"></div><div class="option" onclick="checkAnswer(this)"></div><div class="option" onclick="checkAnswer(this)"></div>`; } document.querySelector('#quiz-game .next-btn').textContent = 'अगला प्रश्न'; loadQuestion(); startTimer(); }
+        function checkAnswer(option) { if (!gameActive) return; const qData = quizQuestions[currentLevel][currentQuestion]; const isCorrect = option.textContent === qData.answer; const sInfo = document.getElementById('sutra-info'); if (isCorrect) { score++; document.getElementById('score').textContent = score; option.classList.add('correct'); playSound('correct'); sInfo.innerHTML = `<strong>सही!</strong> सूत्र: ${qData.sutra}<br>${qData.explanation}`; } else { option.classList.add('incorrect'); playSound('incorrect'); sInfo.innerHTML = `<strong>गलत।</strong> सही उत्तर है <strong>${qData.answer}</strong>.<br><strong>सूत्र:</strong> ${qData.sutra}<br>${qData.explanation}`; document.querySelectorAll('#quiz-game .option').forEach(opt => { if (opt.textContent === qData.answer) opt.classList.add('correct'); }); } sInfo.style.display = 'block'; document.querySelectorAll('#quiz-game .option').forEach(opt => opt.onclick = null); document.querySelector('#quiz-game .next-btn').classList.remove('hidden'); gameActive = false; }
+        function nextQuestion() { currentQuestion++; const questions = quizQuestions[currentLevel]; if (currentQuestion < questions.length) { loadQuestion(); document.querySelectorAll('#quiz-game .option').forEach(opt => opt.onclick = function() { checkAnswer(this); }); startTimer(); } else { stopTimer(); document.getElementById('question').textContent = `क्विज़ पूरा हुआ! स्कोर: ${score}/${questions.length}`; document.getElementById('sutra-info').style.display = 'block'; document.getElementById('sutra-info').textContent = "बहुत बढ़िया!"; document.querySelector('#quiz-game .quiz-options').innerHTML = ''; document.querySelector('#quiz-game .next-btn').textContent = 'फिर से शुरू करें'; currentQuestion++; playSound('complete'); } }
+        function setupMemoryGame() { const mCards = document.getElementById('memory-cards'); mCards.innerHTML = ''; flippedCards = []; matchedPairs = 0; let gSutras = shuffleArray([...sutras]).slice(0, 8); let cValues = shuffleArray([...gSutras, ...gSutras]); cValues.forEach(val => { const card = document.createElement('div'); card.className = 'memory-card'; card.dataset.name = val.name; card.innerHTML = `<div class="memory-card-inner"><div class="front-face">?</div><div class="back-face">${val.name}<br><small>${val.meaning}</small></div></div>`; card.addEventListener('click', flipCard); mCards.appendChild(card); }); document.getElementById('pairs-found').textContent = `0 / ${gSutras.length}`; startTimer(); }
+        function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[array[i], array[j]] = [array[j], array[i]]; } return array; }
+        function flipCard() { if (lockBoard || this.classList.contains('flipped') || !gameActive) return; this.classList.add('flipped'); flippedCards.push(this); playSound('flip'); if (flippedCards.length === 2) checkForMatch(); }
+        function checkForMatch() { lockBoard = true; const [c1, c2] = flippedCards; const isMatch = c1.dataset.name === c2.dataset.name; isMatch ? disableCards() : unflipCards(); }
+        function disableCards() { flippedCards.forEach(c => c.removeEventListener('click', flipCard)); matchedPairs++; document.getElementById('pairs-found').textContent = `${matchedPairs} / 8`; playSound('match'); if (matchedPairs === 8) { stopTimer(); playSound('complete'); setTimeout(() => alert('बधाई हो! आपने सभी जोड़ियाँ ढूँढ़ लीं!'), 500); } resetBoard(); }
+        function unflipCards() { setTimeout(() => { flippedCards.forEach(c => c.classList.remove('flipped')); resetBoard(); }, 1200); }
+        function resetBoard() { [flippedCards, lockBoard] = [[], false]; }
+        window.onload = initGame;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>कठिन वैदिक गणित क्विज़</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root { --dark-bg: #120118; --primary-purple: #8A2BE2; --light-purple: #c58af9; --glow-color: rgba(138, 43, 226, 0.75); --text-color: #f0f0f0; --header-height: 70px; --correct-green: #388e3c; --wrong-red: #d32f2f; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif; background-color: var(--dark-bg); background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%); color: var(--text-color); min-height: 100vh; padding-top: var(--header-height); }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        header { background: rgba(18, 1, 24, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(138, 43, 226, 0.3); position: fixed; top: 0; left: 0; width: 100%; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-color); text-decoration: none; text-shadow: 0 0 5px var(--glow-color); }
+        .logo i { color: var(--primary-purple); margin-right: 0.5rem; }
+        .nav-menu { display: flex; list-style-type: none; gap: 2rem; }
+        .nav-link { color: var(--text-color); text-decoration: none; }
+        .nav-link.active { color: var(--light-purple); }
+        /* Add this CSS inside your <style> tag */
+
+.language-switcher {
+    margin-left: auto; /* Pushes the switcher to the right */
+    margin-right: 2rem;
+}
+
+.language-switcher a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Adjust for mobile view */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 18px;
+        right: 70px; /* Position it next to the hamburger icon */
+        margin: 0;
+    }
+    .language-switcher a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+        main { display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - var(--header-height) - 180px); padding: 4rem 0; }
+        .quiz-card { background: rgba(26, 2, 38, 0.7); border: 2px solid var(--primary-purple); border-radius: 15px; padding: 2.5rem; width: 100%; max-width: 700px; box-shadow: 0 0 30px var(--glow-color); }
+        .quiz-card h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--light-purple); margin-bottom: 2rem; text-align: center; }
+        .question-container { margin-bottom: 2rem; text-align: left; }
+        .question-number { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--primary-purple); margin-bottom: 0.5rem; }
+        .question-text { font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.6; }
+        .options label { display: block; background: rgba(40, 5, 60, 0.6); border: 1px solid var(--primary-purple); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1rem; cursor: pointer; transition: background 0.3s ease, border-color 0.3s ease; display: flex; align-items: center; }
+        .options label:hover:not(.disabled) { background: rgba(60, 10, 80, 0.7); border-color: var(--light-purple); }
+        .options label.disabled { cursor: not-allowed; opacity: 0.7; }
+        .options input[type="radio"] { margin-right: 1rem; transform: scale(1.2); accent-color: var(--primary-purple); }
+        .options label.correct { background-color: rgba(56, 142, 60, 0.3); border-color: var(--correct-green); }
+        .options label.wrong { background-color: rgba(211, 47, 47, 0.3); border-color: var(--wrong-red); }
+        .feedback { margin-top: 1.5rem; padding: 1rem; border-radius: 8px; text-align: left; border: 1px solid transparent; }
+        .feedback.correct { background-color: rgba(56, 142, 60, 0.2); border-color: var(--correct-green); color: var(--correct-green); }
+        .feedback.wrong { background-color: rgba(211, 47, 47, 0.2); border-color: var(--wrong-red); color: var(--wrong-red); }
+        .explanation-heading { font-weight: 600; margin-bottom: 0.5rem; color: var(--light-purple); }
+        .explanation-text { font-size: 1rem; line-height: 1.7; }
+        .controls { display: flex; justify-content: flex-end; margin-top: 2rem; }
+        .btn { background-color: var(--primary-purple); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        .btn:hover:not(:disabled) { background-color: var(--light-purple); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4); }
+        .result-screen { text-align: center; }
+        .result-screen h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--light-purple); margin-bottom: 1.5rem; }
+        .score { font-size: 3rem; font-weight: 700; color: var(--primary-purple); text-shadow: 0 0 15px var(--glow-color); margin-bottom: 2rem; }
+        .retake-btn { background-color: var(--primary-purple); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
+        footer { background: rgba(18, 1, 24, 0.9); padding: 2.5rem 0; border-top: 1px solid rgba(138, 43, 226, 0.3); color: #ccc; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .footer-column { flex: 1; min-width: 200px; }
+        .footer-column h3 { color: var(--light-purple); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--primary-purple); }
+        @media (max-width: 768px) { .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background: #1a0226; width: 100%; text-align: center; transition: left 0.3s ease; gap: 0; } .nav-menu.active { left: 0; } .nav-item { border-bottom: 1px solid rgba(138, 43, 226, 0.2); } .nav-link { display: block; padding: 1.5rem; } .hamburger { display: block; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="home.html" class="logo"><i class="fas fa-square-root-alt"></i> तनाव मुक्त गणित</a>
+            <div class="language-switcher">
+    <a href="hardquiz.html">English</a>
+</div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link">होम</a></li>
+                <li class="nav-item"><a href="hindiformula.html" class="nav-link">सूत्र</a></li>
+                <li class="nav-item"><a href="hindigame.html" class="nav-link active">गेम</a></li>
+                <li class="nav-item"><a href="hindicalculator.html" class="nav-link">कैलकुलेटर</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="quiz-card">
+                <h1 id="quiz-title">कठिन वैदिक गणित क्विज़</h1>
+                <div id="quiz-content">
+                    <div class="question-container">
+                        <p class="question-number">प्रश्न <span id="current-question-num">1</span> / <span id="total-questions">10</span></p>
+                        <p class="question-text" id="question-text"></p>
+                        <div class="options" id="options-container"></div>
+                    </div>
+                    <div class="feedback" id="feedback-container" style="display: none;"></div>
+                    <div class="controls">
+                        <button class="btn" id="next-action-btn" style="display: none;"></button>
+                    </div>
+                </div>
+                <div id="result-screen" class="result-screen" style="display: none;">
+                    <h2>क्विज़ पूरा हुआ!</h2>
+                    <p>आपका स्कोर: <span class="score" id="final-score">0/10</span></p>
+                    <button class="retake-btn" onclick="location.reload()">फिर से क्विज़ लें</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>तनाव मुक्त गणित</h3>
+                    <p>वेदों से प्राचीन गणितीय तकनीकें जो जटिल गणनाओं को सरल बनाती हैं।</p>
+                </div>
+                <div class="footer-column">
+                    <h3>अन्वेषण करें</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">होम</a></li>
+                        <li><a href="hindiformula.html">सूत्र</a></li>
+                        <li><a href="hindigame.html">गेम</a></li>
+                        <li><a href="hindicalculator.html">कैलकुलेटर</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+        
+        const questions = [
+            { question: "घन निकालने के लिए 'यावदूनम्' सूत्र का उपयोग करके, 104³ क्या है?", options: ["1124864", "1124884", "1134864", "1125864"], answer: "1124864", explanation: "आधार 100, अधिशेष 4 है। भाग 1: 104 + 2×(अधिशेष) = 104+8=112। भाग 2: 3×(अधिशेष)² = 3×16=48। भाग 3: (अधिशेष)³ = 4³=64। इन्हें मिलाएं: 1124864।" },
+            { question: "'विलोकनम्' और 'द्वन्द्व योग' विधियों का उपयोग करके 5329 का वर्गमूल क्या है?", options: ["63", "77", "83", "73"], answer: "73", explanation: "अंतिम अंक 9 है, इसलिए मूल का अंतिम अंक 3 या 7 है। पहला भाग 53 है। इसके नीचे निकटतम पूर्ण वर्ग 49 (7²) है। तो पहला अंक 7 है। उत्तर या तो 73 है या 77। एक त्वरित जांच (70²=4900) से पता चलता है कि 5329, 4900 के करीब है, इसलिए 73 सही है।" },
+            { question: "'ऊर्ध्व तिर्यग्भ्याम्' (3-अंकीय गुणा) का उपयोग करके 123 x 321 की गणना करें।", options: ["39483", "38483", "39583", "39473"], answer: "39483", explanation: "इस बहु-चरणीय प्रक्रिया में 5 चरण शामिल हैं: लंबवत, तिरछे (2 अंक), केंद्र में तिरछे (3 अंक), तिरछे (2 अंक), और लंबवत। चरणों से प्राप्त होता है: 3, 8, 14, 8, 3। हासिल लेने पर 39483 प्राप्त होता है।" },
+            { question: "सूत्र 'शून्यं साम्यसमुच्चये' का उपयोग मुख्य रूप से किस संदर्भ में एक अवलोकन के रूप में किया जाता है?", options: ["सामान्य गुणन", "द्विघात समीकरणों में मूलों की प्रकृति का पता लगाना", "विशेष प्रकार के रैखिक समीकरणों को हल करना", "घन की गणना"], answer: "विशेष प्रकार के रैखिक समीकरणों को हल करना", explanation: "इसका अर्थ है 'जब योग समान हो, तो वह योग शून्य होता है'। इसका उपयोग (x+3)+(x+5) = (x+2)+(x+6) जैसे समीकरणों को शीघ्रता से हल करने के लिए किया जाता है, जहाँ दोनों पक्षों पर स्वतंत्र पदों का योग बराबर होता है।" },
+            { question: "विभाजन के लिए 'परावर्त्य योजयेत्' का उपयोग करके, 2435 ÷ 112 क्या है?", options: ["भागफल: 21, शेषफल: 83", "भागफल: 22, शेषफल: 83", "भागफल: 21, शेषफल: 93", "भागफल: 21, शेषफल: -83"], answer: "भागफल: 21, शेषफल: 83", explanation: "आधार 100। भाजक 112। अधिशेष '12' को '-1' और '-2' में बदलें। विभाजन प्रक्रिया से 21 का भागफल और 83 का अंतिम शेषफल प्राप्त होता है।" },
+            { question: "'यावदूनं तावदूनीकृत्य वर्गं च योजयेत्' का उपयोग करके 997² की गणना करें।", options: ["994009", "994019", "984009", "994006"], answer: "994009", explanation: "सूत्र का अर्थ है 'जितनी कमी हो, उतनी ही कम करें और कमी का वर्ग स्थापित करें'। आधार 1000। कमी 3 है। बायां भाग: 997-3=994। दायां भाग: 3²=009 (आधार 1000 के लिए 3 अंक होने चाहिए)। परिणाम: 994009।" },
+            { question: "'अनुरूप्येण' सूत्र का उपयोग करके 23 का घन क्या है?", options: ["12167", "12177", "13167", "12267"], answer: "12167", explanation: "अनुपात 2:3 है। 2³=8 से शुरू करते हुए 4 कॉलम बनाएं। फिर 8×(3/2)=12, 12×(3/2)=18, 18×(3/2)=27। बीच के दो को दोगुना करें: 24, 36। दाएं से बाएं हासिल के साथ जोड़ें: 12167।" },
+            { question: "वैदिक सिद्धांतों का उपयोग करके x के लिए हल करें: 13x + 9 = 9x + 13.", options: ["x = 0", "x = 2", "x = 1", "x = -1"], answer: "x = 1", explanation: "'परावर्त्य योजयेत्' का उपयोग। x-गुणांकों का अंतर 13-9=4 है। स्थिर पदों का अंतर 13-9=4 है। समाधान इन अंतरों का अनुपात है: x = 4/4 = 1।" },
+            { question: "एक सामान्य विभाजन विधि (सीधा विभाजन) के रूप में 'ऊर्ध्व तिर्यग्भ्याम्' का उपयोग करके, 432 ÷ 23 क्या है?", options: ["भागफल: 18, शेषफल: 18", "भागफल: 18, शेषफल: 20", "भागफल: 17, शेषफल: 18", "भागफल: 18, शेषफल: 22"], answer: "भागफल: 18, शेषफल: 18", explanation: "यह सबसे सामान्य लेकिन जटिल विभाजन विधि है, जिसमें विभाजन और तिरछे-गुणन के चरण शामिल हैं। प्रक्रिया सही ढंग से 18 का भागफल और 18 का शेषफल देती है।" },
+            { question: "सूत्र 'सोपान्त्यद्वयमन्त्यम्' 1/x का मान ज्ञात करने से संबंधित है जब x किस अंक में समाप्त होता है?", options: ["1", "5", "9", "3"], answer: "9", explanation: "इस सूत्र का अर्थ है 'अंतिम और उपांत्य का दोगुना'। यह उन भिन्नों के आवर्ती दशमलव रूप को खोजने के लिए एक विशिष्ट तकनीक है जहां हर 9 में समाप्त होने वाली संख्या है।" }
+        ];
+
+        let currentQuestionIndex = 0, score = 0;
+        const questionTextElement = document.getElementById('question-text'), optionsContainer = document.getElementById('options-container'), feedbackContainer = document.getElementById('feedback-container'), currentQuestionNum = document.getElementById('current-question-num'), totalQuestions = document.getElementById('total-questions'), nextActionButton = document.getElementById('next-action-btn'), quizContent = document.getElementById('quiz-content'), resultScreen = document.getElementById('result-screen'), finalScore = document.getElementById('final-score');
+        totalQuestions.textContent = questions.length;
+        function loadQuestion() { const q = questions[currentQuestionIndex]; if (!q) return; currentQuestionNum.textContent = currentQuestionIndex + 1; questionTextElement.textContent = q.question; optionsContainer.innerHTML = ''; feedbackContainer.style.display = 'none'; nextActionButton.style.display = 'none'; q.options.forEach(option => { const label = document.createElement('label'), input = document.createElement('input'); input.type = 'radio'; input.name = 'quiz-option'; input.value = option; input.addEventListener('change', () => handleOptionSelect(option)); label.appendChild(input); label.appendChild(document.createTextNode(option)); optionsContainer.appendChild(label); }); }
+        function handleOptionSelect(selectedValue) { optionsContainer.querySelectorAll('input').forEach(input => { input.disabled = true; input.parentElement.classList.add('disabled'); }); const q = questions[currentQuestionIndex]; const isCorrect = selectedValue === q.answer; if (isCorrect) score++; optionsContainer.querySelectorAll('label').forEach(label => { if (label.querySelector('input').value === q.answer) { label.classList.add('correct'); } else if (label.querySelector('input').value === selectedValue) { label.classList.add('wrong'); } }); feedbackContainer.innerHTML = `<p class="explanation-heading">${isCorrect ? 'सही! 🎉' : 'गलत! सही उत्तर था: ' + q.answer}</p><p class="explanation-text">${q.explanation}</p>`; feedbackContainer.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`; feedbackContainer.style.display = 'block'; setTimeout(() => { if (currentQuestionIndex < questions.length - 1) { nextActionButton.textContent = 'अगला प्रश्न'; } else { nextActionButton.textContent = 'क्विज़ सबमिट करें'; } nextActionButton.style.display = 'block'; }, 1500); }
+        function handleNextAction() { if (currentQuestionIndex < questions.length - 1) { currentQuestionIndex++; loadQuestion(); } else { showResultScreen(); } }
+        function showResultScreen() { quizContent.style.display = 'none'; resultScreen.style.display = 'block'; finalScore.textContent = `${score}/${questions.length}`; }
+        nextActionButton.addEventListener('click', handleNextAction);
+        loadQuestion();
+    </script>
+</body>
+</html>

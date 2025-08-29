@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedic Mathematics Formulas - Ancient Sutras for Modern Calculations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --dark-bg: #120118;
+            --primary-purple: #8A2BE2; /* BlueViolet */
+            --light-purple: #c58af9;
+            --glow-color: rgba(138, 43, 226, 0.75);
+            --text-color: #f0f0f0;
+            --header-height: 70px;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Add this CSS inside your <style> tag */
+
+.language-switcher {
+    margin-left: auto; /* Pushes the switcher to the right */
+    margin-right: 2rem;
+}
+
+.language-switcher a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Adjust for mobile view */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 18px;
+        right: 70px; /* Position it next to the hamburger icon */
+        margin: 0;
+    }
+    .language-switcher a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+        /* Body and Background Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%);
+            color: var(--text-color);
+            padding-top: var(--header-height);
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(138, 43, 226, 0) 60%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header and Navigation Styling */
+        header {
+            background: rgba(18, 1, 24, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--header-height);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .logo i {
+            color: var(--primary-purple);
+            margin-right: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--light-purple);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-purple);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        /* Hero Section Styling */
+        .formulas-hero {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(rgba(18, 1, 24, 0.5), rgba(18, 1, 24, 0.8));
+        }
+        
+        .formulas-hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-shadow: 0 0 15px var(--glow-color);
+            margin-bottom: 1rem;
+        }
+        
+        .formulas-hero p {
+            font-size: 1.2rem;
+            color: var(--light-purple);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content & Section Styling */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--light-purple);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Sutra Card Styling */
+        .sutra-card {
+            background: rgba(26, 2, 38, 0.7);
+            border: 2px solid var(--primary-purple);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+        .sutra-card:hover {
+            box-shadow: 0 0 25px var(--glow-color);
+            transform: translateY(-5px);
+        }
+
+        .sutra-header {
+            padding: 1.5rem;
+            background: rgba(40, 5, 60, 0.5);
+            border-bottom: 1px solid var(--primary-purple);
+        }
+
+        .sutra-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--light-purple);
+        }
+        
+        .sutra-body {
+            padding: 1.5rem;
+        }
+
+        .sutra-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .sutra-example, .sutra-steps {
+            background: rgba(18, 1, 24, 0.6);
+            border-left: 4px solid var(--primary-purple);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .sutra-example h4, .sutra-steps h4 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.2rem;
+            color: var(--light-purple);
+            margin-bottom: 0.8rem;
+        }
+
+        .sutra-example p {
+            font-family: 'Courier New', Courier, monospace;
+            background: #000;
+            padding: 0.5rem;
+            border-radius: 5px;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 35px;
+            height: 35px;
+            background: var(--primary-purple);
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+        
+        .step-content {
+            font-size: 1rem;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: rgba(18, 1, 24, 0.9);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            color: #ccc;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            color: var(--light-purple);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-purple);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: var(--header-height);
+                flex-direction: column;
+                background: #1a0226;
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1.5rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-square-root-alt"></i> Zero Stress Maths</a>
+                    <div class="language-switcher">
+    <a href="hindiformula.html">हिन्दी</a>
+</div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="formulas.html" class="nav-link active">Formulas</a></li>
+                <li class="nav-item"><a href="game.html" class="nav-link">Games</a></li>
+                <li class="nav-item"><a href="cal.html" class="nav-link">Calculator</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="formulas-hero">
+        <div class="container">
+            <h1>Vedic Mathematics Sutras</h1>
+            <p>Discover the ancient mathematical formulas from the Vedas that make calculations faster and easier.</p>
+        </div>
+    </section>
+
+    <main>
+        <section class="section">
+            <div class="container sutras-container">
+                <div class="section-title">
+                    <h2>16 Vedic Sutras</h2>
+                    <p>These sutras form the basis of Vedic Mathematics</p>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header">
+                        <h3>Ekadhikena Purvena</h3>
+                    </div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"By one more than the previous one" - This sutra is useful for squaring numbers ending with 5 and for decimal calculations.</p>
+                        
+                        <div class="sutra-example">
+                            <h4>Example: Squaring numbers ending with 5</h4>
+                            <p>To calculate 25²:</p>
+                            <p>Multiply the first digit (2) by one more than itself (2+1=3), so 2×3=6, then append 25 → 625</p>
+                        </div>
+                        
+                        <div class="sutra-steps">
+                            <h4>Step-by-Step Process:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Take the number before 5 (in 25, it's 2)</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">Multiply it by one more than itself (2 × 3 = 6)</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Append 25 to the result (625)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header">
+                        <h3>Nikhilam Navatashcaramam Dashatah</h3>
+                    </div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"All from 9 and the last from 10" - This sutra is used for subtraction from bases like 10, 100, 1000, etc.</p>
+                        
+                        <div class="sutra-example">
+                            <h4>Example: Subtract from 1000</h4>
+                            <p>To subtract 357 from 1000:</p>
+                            <p>Subtract each digit from 9, and the last digit from 10: 9-3=6, 9-5=4, 10-7=3 → 643</p>
+                        </div>
+                        
+                        <div class="sutra-steps">
+                            <h4>Step-by-Step Process:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Write down the number to be subtracted</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">Subtract each digit from 9, except the last digit</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Subtract the last digit from 10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header">
+                        <h3>Urdhva-Tiryagbyham</h3>
+                    </div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"Vertically and crosswise" - This is a general multiplication formula applicable to all cases of multiplication.</p>
+                        
+                        <div class="sutra-example">
+                            <h4>Example: Multiply 12 × 13</h4>
+                            <p>Multiply vertically: 2×3=6 (right digit)</p>
+                            <p>Multiply crosswise and add: (1×3)+(2×1)=3+2=5 (middle digit)</p>
+                            <p>Multiply vertically: 1×1=1 (left digit) → 156</p>
+                        </div>
+                        
+                        <div class="sutra-steps">
+                            <h4>Step-by-Step Process:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Multiply the right-hand digits (units place)</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">Multiply crosswise and add the results</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Multiply the left-hand digits (tens place)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header">
+                        <h3>Paravartya Yojayet</h3>
+                    </div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"Transpose and apply" - This sutra is used for algebraic equations and division.</p>
+                        
+                        <div class="sutra-example">
+                            <h4>Example: Solve 2x + 5 = 13</h4>
+                            <p>Transpose 5 to the other side: 2x = 13 - 5 = 8</p>
+                            <p>Then x = 8 ÷ 2 = 4</p>
+                        </div>
+                        
+                        <div class="sutra-steps">
+                            <h4>Step-by-Step Process:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Identify the term to be transposed</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">Change its sign and move it to the other side</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Simplify and solve the equation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header">
+                        <h3>Shunyam Saamyasamuccaye</h3>
+                    </div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"When the sum is the same, that sum is zero" - This sutra is used for solving equations where the sum of the coefficients is zero.</p>
+                        
+                        <div class="sutra-example">
+                            <h4>Example: Solve (x+3)/(x+5) = (x+4)/(x+6)</h4>
+                            <p>The sum of numerators: (x+3)+(x+4) = 2x+7</p>
+                            <p>The sum of denominators: (x+5)+(x+6) = 2x+11</p>
+                            <p>Since these are not equal, this specific rule doesn't apply directly.</p>
+                        </div>
+                        
+                        <div class="sutra-steps">
+                            <h4>Step-by-Step Process:</h4>
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">Check if a common factor exists across all terms in an equation.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">If so, that factor can be equated to zero.</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">Also applies when numerators are same, so denominator sum is zero.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Zero Stress Maths</h3>
+                    <p>Ancient mathematical techniques from the Vedas that simplify complex calculations.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="formulas.html">Formulas</a></li>
+                        <li><a href="game.html">Games</a></li>
+                        <li><a href="cal.html">Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

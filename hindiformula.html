@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>वैदिक गणित सूत्र - आधुनिक गणनाओं के लिए प्राचीन सूत्र</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --dark-bg: #120118; --primary-purple: #8A2BE2; --light-purple: #c58af9; --glow-color: rgba(138, 43, 226, 0.75); --text-color: #f0f0f0; --header-height: 70px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif; background-color: var(--dark-bg); background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%); color: var(--text-color); padding-top: var(--header-height); }
+        body::before { content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(138, 43, 226, 0) 60%); animation: rotateGlow 20s linear infinite; z-index: -1; }
+        @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        header { background: rgba(18, 1, 24, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(138, 43, 226, 0.3); position: fixed; top: 0; left: 0; width: 100%; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-color); text-decoration: none; text-shadow: 0 0 5px var(--glow-color); }
+        .logo i { color: var(--primary-purple); margin-right: 0.5rem; }
+        .nav-menu { display: flex; list-style-type: none; gap: 2rem; }
+        .nav-link { color: var(--text-color); text-decoration: none; }
+        /* Add this CSS inside your <style> tag */
+
+.language-switcher {
+    margin-left: auto; /* Pushes the switcher to the right */
+    margin-right: 2rem;
+}
+
+.language-switcher a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Adjust for mobile view */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 18px;
+        right: 70px; /* Position it next to the hamburger icon */
+        margin: 0;
+    }
+    .language-switcher a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+        .nav-link.active { color: var(--light-purple); }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+        .formulas-hero { padding: 5rem 0; text-align: center; background: linear-gradient(rgba(18, 1, 24, 0.5), rgba(18, 1, 24, 0.8)); }
+        .formulas-hero h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; text-shadow: 0 0 15px var(--glow-color); margin-bottom: 1rem; }
+        .formulas-hero p { font-size: 1.2rem; color: var(--light-purple); max-width: 600px; margin: 0 auto; }
+        main { padding: 4rem 0; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--light-purple); margin-bottom: 0.5rem; }
+        .sutra-card { background: rgba(26, 2, 38, 0.7); border: 2px solid var(--primary-purple); border-radius: 15px; margin-bottom: 2rem; overflow: hidden; backdrop-filter: blur(5px); transition: box-shadow 0.3s ease, transform 0.3s ease; }
+        .sutra-card:hover { box-shadow: 0 0 25px var(--glow-color); transform: translateY(-5px); }
+        .sutra-header { padding: 1.5rem; background: rgba(40, 5, 60, 0.5); border-bottom: 1px solid var(--primary-purple); }
+        .sutra-header h3 { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--light-purple); }
+        .sutra-body { padding: 1.5rem; }
+        .sutra-description { font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; }
+        .sutra-example, .sutra-steps { background: rgba(18, 1, 24, 0.6); border-left: 4px solid var(--primary-purple); padding: 1rem; margin-bottom: 1.5rem; border-radius: 0 8px 8px 0; }
+        .sutra-example h4, .sutra-steps h4 { font-size: 1.2rem; color: var(--light-purple); margin-bottom: 0.8rem; }
+        .sutra-example p { font-family: 'Courier New', Courier, monospace; background: #000; padding: 0.5rem; border-radius: 5px; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .step { display: flex; align-items: center; margin-bottom: 1rem; }
+        .step-number { flex-shrink: 0; width: 35px; height: 35px; background: var(--primary-purple); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; margin-right: 1rem; }
+        .step-content { font-size: 1.1rem; }
+        footer { background: rgba(18, 1, 24, 0.9); padding: 2.5rem 0; border-top: 1px solid rgba(138, 43, 226, 0.3); color: #ccc; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .footer-column { flex: 1; min-width: 200px; }
+        .footer-column h3 { color: var(--light-purple); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--primary-purple); }
+        @media (max-width: 768px) { .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background: #1a0226; width: 100%; text-align: center; transition: left 0.3s ease; gap: 0; } .nav-menu.active { left: 0; } .nav-item { border-bottom: 1px solid rgba(138, 43, 226, 0.2); } .nav-link { display: block; padding: 1.5rem; } .hamburger { display: block; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="home.html" class="logo"><i class="fas fa-square-root-alt"></i> तनाव मुक्त गणित</a>
+            <div class="language-switcher">
+    <a href="hindiformula.html">English</a>
+</div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link">होम</a></li>
+                <li class="nav-item"><a href="hindiformula.html" class="nav-link active">सूत्र</a></li>
+                <li class="nav-item"><a href="hindigame.html" class="nav-link">गेम</a></li>
+                <li class="nav-item"><a href="hindicalculator.html" class="nav-link">कैलकुलेटर</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="formulas-hero">
+        <div class="container">
+            <h1>वैदिक गणित सूत्र</h1>
+            <p>वेदों से प्राचीन गणितीय सूत्रों की खोज करें जो गणनाओं को तेज और आसान बनाते हैं।</p>
+        </div>
+    </section>
+
+    <main>
+        <section class="section">
+            <div class="container sutras-container">
+                <div class="section-title">
+                    <h2>16 वैदिक सूत्र</h2>
+                    <p>ये सूत्र वैदिक गणित का आधार बनते हैं</p>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header"><h3>Ekadhikena Purvena</h3></div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"पहले वाले से एक अधिक द्वारा" - यह सूत्र 5 से समाप्त होने वाली संख्याओं का वर्ग करने और दशमलव गणना के लिए उपयोगी है।</p>
+                        <div class="sutra-example">
+                            <h4>उदाहरण: 5 से समाप्त होने वाली संख्याओं का वर्ग करना</h4>
+                            <p>25² की गणना करने के लिए:</p>
+                            <p>पहले अंक (2) को उससे एक अधिक (2+1=3) से गुणा करें, तो 2×3=6, फिर 25 जोड़ दें → 625</p>
+                        </div>
+                        <div class="sutra-steps">
+                            <h4>चरण-दर-चरण प्रक्रिया:</h4>
+                            <div class="step"><div class="step-number">1</div><div class="step-content">5 से पहले की संख्या लें (25 में, यह 2 है)</div></div>
+                            <div class="step"><div class="step-number">2</div><div class="step-content">इसे स्वयं से एक अधिक से गुणा करें (2 × 3 = 6)</div></div>
+                            <div class="step"><div class="step-number">3</div><div class="step-content">परिणाम में 25 जोड़ें (625)</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header"><h3>Nikhilam Navatashcaramam Dashatah</h3></div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"सभी 9 से और अंतिम 10 से" - इस सूत्र का उपयोग 10, 100, 1000 आदि जैसे आधारों से घटाव के लिए किया जाता है।</p>
+                        <div class="sutra-example">
+                            <h4>उदाहरण: 1000 से घटाएं</h4>
+                            <p>1000 में से 357 घटाने के लिए:</p>
+                            <p>प्रत्येक अंक को 9 से, और अंतिम अंक को 10 से घटाएं: 9-3=6, 9-5=4, 10-7=3 → 643</p>
+                        </div>
+                        <div class="sutra-steps">
+                            <h4>चरण-दर-चरण प्रक्रिया:</h4>
+                            <div class="step"><div class="step-number">1</div><div class="step-content">घटाई जाने वाली संख्या लिखें</div></div>
+                            <div class="step"><div class="step-number">2</div><div class="step-content">अंतिम अंक को छोड़कर प्रत्येक अंक को 9 से घटाएं</div></div>
+                            <div class="step"><div class="step-number">3</div><div class="step-content">अंतिम अंक को 10 से घटाएं</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sutra-card">
+                    <div class="sutra-header"><h3>Urdhva-Tiryagbyham</h3></div>
+                    <div class="sutra-body">
+                        <p class="sutra-description">"लंबवत और तिरछे" - यह एक सामान्य गुणन सूत्र है जो गुणन के सभी मामलों में लागू होता है।</p>
+                        <div class="sutra-example">
+                            <h4>उदाहरण: 12 × 13 गुणा करें</h4>
+                            <p>लंबवत गुणा करें: 2×3=6 (दायां अंक)</p>
+                            <p>तिरछे गुणा करें और जोड़ें: (1×3)+(2×1)=3+2=5 (मध्य अंक)</p>
+                            <p>लंबवत गुणा करें: 1×1=1 (बायां अंक) → 156</p>
+                        </div>
+                        <div class="sutra-steps">
+                            <h4>चरण-दर-चरण प्रक्रिया:</h4>
+                            <div class="step"><div class="step-number">1</div><div class="step-content">दाहिने हाथ के अंकों (इकाई स्थान) को गुणा करें</div></div>
+                            <div class="step"><div class="step-number">2</div><div class="step-content">तिरछे गुणा करें और परिणामों को जोड़ें</div></div>
+                            <div class="step"><div class="step-number">3</div><div class="step-content">बाएं हाथ के अंकों (दहाई स्थान) को गुणा करें</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>तनाव मुक्त गणित</h3>
+                    <p>वेदों से प्राचीन गणितीय तकनीकें जो जटिल गणनाओं को सरल बनाती हैं।</p>
+                </div>
+                <div class="footer-column">
+                    <h3>अन्वेषण करें</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">होम</a></li>
+                        <li><a href="hindiformula.html">सूत्र</a></li>
+                        <li><a href="hindigame.html">गेम</a></li>
+                        <li><a href="hindicalculator.html">कैलकुलेटर</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedic Mathematics - Ancient Wisdom for Modern Minds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --dark-bg: #120118;
+            --primary-purple: #8A2BE2; /* BlueViolet */
+            --light-purple: #c58af9;
+            --glow-color: rgba(138, 43, 226, 0.75);
+            --text-color: #f0f0f0;
+            --header-height: 70px;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Background Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%);
+            color: var(--text-color);
+            padding-top: var(--header-height);
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(138, 43, 226, 0) 60%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* Add this CSS inside your <style> tag */
+
+.language-switcher {
+    margin-left: auto; /* Pushes the switcher to the right */
+    margin-right: 2rem;
+}
+
+.language-switcher a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: var(--primary-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Adjust for mobile view */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: absolute;
+        top: 18px;
+        right: 70px; /* Position it next to the hamburger icon */
+        margin: 0;
+    }
+    .language-switcher a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+        /* Header and Navigation Styling */
+        header {
+            background: rgba(18, 1, 24, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--header-height);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .logo i {
+            color: var(--primary-purple);
+            margin-right: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--light-purple);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-purple);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: calc(100vh - var(--header-height));
+            background: linear-gradient(rgba(18, 1, 24, 0.7), rgba(18, 1, 24, 0.9)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cg fill="%238A2BE2" fill-opacity="0.05"%3E%3Crect x="0" y="0" width="50" height="50"/%3E%3Crect x="50" y="50" width="50" height="50"/%3E%3C/g%3E%3C/svg%3E');
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            text-shadow: 0 0 20px var(--glow-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--light-purple);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .btn:hover {
+            background-color: var(--light-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px var(--glow-color);
+        }
+        
+        /* General Section Styling */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--light-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        /* History Section Styling */
+        .history-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .history-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .history-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .history-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .history-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+        }
+        
+        /* Features Section Styling */
+        .features {
+             background: rgba(26, 2, 38, 0.4);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(26, 2, 38, 0.7);
+            border: 2px solid var(--primary-purple);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 0 25px var(--glow-color);
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-purple);
+            text-shadow: 0 0 15px var(--glow-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-purple);
+        }
+
+        .feature-card p {
+            line-height: 1.6;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: rgba(18, 1, 24, 0.9);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            color: #ccc;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            color: var(--light-purple);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-purple);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: var(--header-height);
+                flex-direction: column;
+                background: #1a0226;
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1.5rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-square-root-alt"></i> Zero Stress Maths</a>
+            <div class="language-switcher">
+    <a href="home.html">हिन्दी</a>
+</div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="formulas.html" class="nav-link">Formulas</a></li>
+                <li class="nav-item"><a href="game.html" class="nav-link">Games</a></li>
+                <li class="nav-item"><a href="cal.html" class="nav-link">Calculator</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Vedic Mathematics</h1>
+            <p>Ancient Mathematical Wisdom for the Modern World</p>
+            <a href="formulas.html" class="btn">Explore Sutras</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>History of Vedic Mathematics</h2>
+            </div>
+            <div class="history-content">
+                <div class="history-text">
+                    <p>Vedic Mathematics is a system of mathematics that was rediscovered from the ancient Indian texts called the Vedas, which date back to 1500 BCE or earlier. The term "Vedic" refers to this Vedic basis.</p>
+                    <p>The system was rediscovered by Sri Bharati Krishna Tirthaji (1884-1960), who was the Shankaracharya of Govardhana Matha in Puri, India. According to Tirthaji, all of mathematics is based on sixteen sutras (aphorisms) and thirteen sub-sutras.</p>
+                    <p>These sutras describe natural ways of solving a whole range of mathematical problems in a simple and easy-to-remember format. Vedic Mathematics is said to be based on the working of the natural mind and offers a fresh approach to mathematics.</p>
+                    <p>Unlike conventional mathematics which is linear in approach, Vedic Mathematics offers multiple calculation methods for the same problem, allowing individuals to choose the method that works best for them.</p>
+                </div>
+                <div class="history-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='300' viewBox='0 0 500 300'%3E%3Crect width='500' height='300' fill='%23120118'/%3E%3Cpath d='M100,150 Q150,50 200,150 T300,150 T400,150' stroke='%238a2be2' stroke-width='3' fill='none' stroke-dasharray='5,5' opacity='0.5'/%3E%3Ccircle cx='100' cy='150' r='10' fill='%239b4dff'/%3E%3Ccircle cx='200' cy='150' r='10' fill='%239b4dff'/%3E%3Ccircle cx='300' cy='150' r='10' fill='%239b4dff'/%3E%3Ccircle cx='400' cy='150' r='10' fill='%239b4dff'/%3E%3Ctext x='250' y='220' font-family='Orbitron, sans-serif' font-size='24' fill='%23e0e0e0' text-anchor='middle'%3EAncient Wisdom%3C/text%3E%3C/svg%3E" alt="Vedic Mathematics Visualization">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Vedic Mathematics?</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Mental Calculation</h3>
+                    <p>Vedic Math techniques enable complex calculations to be done mentally, without the need for paper or calculator.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Faster Results</h3>
+                    <p>Calculations can be performed much faster compared to conventional methods, saving time and effort.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Improves Creativity</h3>
+                    <p>The multiple approaches to problem solving encourage creative and flexible thinking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Easy to Learn</h3>
+                    <p>Vedic Math is based on simple rules and principles that are easy to understand and apply.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Zero Stress Maths</h3>
+                    <p>Ancient mathematical techniques from the Vedas that simplify complex calculations.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="formulas.html">Formulas</a></li>
+                        <li><a href="game.html">Games</a></li>
+                        <li><a href="cal.html">Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
