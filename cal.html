@@ -3,338 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedic Mathematics Calculator</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <style>
-        :root {
-            --dark-bg: #120118;
-            --primary-purple: #8A2BE2; 
-            --light-purple: #c58af9;
-            --glow-color: rgba(138, 43, 226, 0.75);
-            --text-color: #f0f0f0;
-            --header-height: 70px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-
-.language-switcher {
-    margin-left: auto; 
-    margin-right: 2rem;
-}
-
-.language-switcher a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--primary-purple);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.language-switcher a:hover {
-    background-color: var(--primary-purple);
-    color: white;
-    box-shadow: 0 0 10px var(--glow-color);
-}
-
-@media (max-width: 768px) {
-    .language-switcher {
-        position: absolute;
-        top: 18px;
-        right: 70px; 
-        margin: 0;
-    }
-    .language-switcher a {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-    }
-}
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
-            background-image: linear-gradient(315deg, #1a0226 0%, #000000 74%);
-            color: var(--text-color);
-            min-height: 100vh;
-            padding-top: var(--header-height);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(138, 43, 226, 0) 60%);
-            animation: rotateGlow 20s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes rotateGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        
-        header {
-            background: rgba(18, 1, 24, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-        }
-
-        .nav-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-color); text-decoration: none; text-shadow: 0 0 5px var(--glow-color); }
-        .logo i { color: var(--primary-purple); margin-right: 0.5rem; }
-        .nav-menu { display: flex; list-style-type: none; gap: 2rem; }
-        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; position: relative; padding: 0.5rem 0; transition: color 0.3s ease; }
-        .nav-link:hover, .nav-link.active { color: var(--light-purple); }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--primary-purple); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease; }
-        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: bottom left; }
-        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--text-color); }
-
-        
-        main {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 4rem 0;
-        }
-
-        .calculator-container {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .main-heading {
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--light-purple);
-            text-shadow: 0 0 15px var(--glow-color);
-            margin-bottom: 2rem;
-        }
-        
-        
-        .calculator-body {
-            background: rgba(26, 2, 38, 0.7);
-            border: 2px solid var(--primary-purple);
-            border-radius: 20px;
-            padding: 1.5rem;
-            box-shadow: 0 0 40px var(--glow-color);
-            backdrop-filter: blur(10px);
-        }
-
-        
-        .calculator-display {
-            background: #000;
-            border: 1px solid var(--primary-purple);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            text-align: right;
-            font-family: 'Orbitron', sans-serif;
-            word-wrap: break-word;
-            word-break: break-all;
-        }
-
-        .previous-operand {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1rem;
-            min-height: 24px;
-        }
-
-        .current-operand {
-            color: white;
-            font-size: 2.5rem;
-            min-height: 48px;
-        }
-
-        
-        .calculator-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-        }
-
-        .calculator-buttons button {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            padding: 1rem 0;
-            background: rgba(18, 1, 24, 0.6);
-            color: var(--text-color);
-            border: 1px solid var(--primary-purple);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .calculator-buttons button:hover {
-            background: var(--primary-purple);
-            box-shadow: 0 0 15px var(--glow-color);
-        }
-        
-        .calculator-buttons button:active {
-            transform: scale(0.95);
-        }
-
-        .span-two {
-            grid-column: span 2;
-        }
-        
-        .operator {
-            color: var(--light-purple);
-        }
-
-        .equals {
-            background: var(--primary-purple);
-        }
-        .equals:hover {
-            background: var(--light-purple);
-        }
-        
-        
-        #explanation-panel {
-            background: rgba(26, 2, 38, 0.7);
-            border: 1px solid var(--primary-purple);
-            border-radius: 15px;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            display: none; /* Initially hidden */
-            text-align: left;
-        }
-
-        #explanation-panel h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--light-purple);
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--primary-purple);
-            padding-bottom: 0.5rem;
-        }
-        
-        #explanation-panel p {
-            line-height: 1.6;
-            margin-bottom: 0.5rem;
-        }
-
-        #explanation-panel code {
-            font-family: 'Courier New', Courier, monospace;
-            background: #000;
-            padding: 0.2rem 0.5rem;
-            border-radius: 5px;
-            color: var(--light-purple);
-        }
-
-        
-        footer {
-            background: rgba(18, 1, 24, 0.9);
-            padding: 2.5rem 0;
-            border-top: 1px solid rgba(138, 43, 226, 0.3);
-            color: #ccc;
-        }
-        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
-        .footer-column { flex: 1; min-width: 200px; }
-        .footer-column h3 { color: var(--light-purple); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0.75rem; }
-        .footer-links a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--primary-purple); }
-
-        
-        @media (max-width: 768px) {
-            .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background: #1a0226; width: 100%; text-align: center; transition: left 0.3s ease; gap: 0; }
-            .nav-menu.active { left: 0; }
-            .nav-item { border-bottom: 1px solid rgba(138, 43, 226, 0.2); }
-            .nav-link { display: block; padding: 1.5rem; }
-            .hamburger { display: block; }
-        }
-    </style>
+    <title>Vedic Mathematics Calculator - Ancient Techniques Made Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <!-- Header Navigation -->
     <header>
         <div class="container nav-container">
             <a href="index.html" class="logo"><i class="fas fa-square-root-alt"></i> Zero Stress Maths</a>
-            <div class="language-switcher">
-    <a href="hindicalculator.html">हिन्दी</a>
-</div>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
             <ul class="nav-menu" id="nav-menu">
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="formulas.html" class="nav-link">Formulas</a></li>
-                <li class="nav-item"><a href="game.html" class="nav-link">Games</a></li>
-                <li class="nav-item"><a href="cal.html" class="nav-link active">Calculator</a></li>
+                <li class="nav-item"><a href="games.html" class="nav-link">Games</a></li>
+                <li class="nav-item"><a href="calculator.html" class="nav-link active">Calculator</a></li>
             </ul>
         </div>
     </header>
 
-    <main>
+    <!-- Calculator Page Hero Section -->
+    <section class="formulas-hero">
         <div class="container">
-            <div class="calculator-container">
-                <h1 class="main-heading">Vedic Calculator</h1>
-                <div class="calculator-body">
-                    <div class="calculator-display">
-                        <div class="previous-operand" data-previous-operand></div>
-                        <div class="current-operand" data-current-operand></div>
+            <h1>Vedic Mathematics Calculator</h1>
+            <p>Experience ancient calculation methods with modern digital convenience</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Calculator Section -->
+        <section class="section">
+            <div class="container calculator-container">
+                <div class="section-title">
+                    <h2>Digital Vedic Calculator</h2>
+                    <p>Perform calculations using traditional Vedic techniques with step-by-step explanations</p>
+                </div>
+
+                <div class="calculator-layout">
+                    <!-- Calculator Display -->
+                    <div class="sutra-card calculator-card">
+                        <div class="sutra-header">
+                            <h3><i class="fas fa-calculator"></i> Vedic Calculator</h3>
+                        </div>
+                        <div class="sutra-body">
+                            <div class="calculator-display">
+                                <div class="display-screen" id="display">0</div>
+                                <div class="calculation-history" id="history"></div>
+                            </div>
+                            
+                            <div class="calculator-buttons">
+                                <div class="button-row">
+                                    <button class="calc-btn function-btn" onclick="clearAll()">C</button>
+                                    <button class="calc-btn function-btn" onclick="clearEntry()">CE</button>
+                                    <button class="calc-btn function-btn" onclick="backspace()">⌫</button>
+                                    <button class="calc-btn operator-btn" onclick="inputOperator('/')">÷</button>
+                                </div>
+                                
+                                <div class="button-row">
+                                    <button class="calc-btn number-btn" onclick="inputNumber('7')">7</button>
+                                    <button class="calc-btn number-btn" onclick="inputNumber('8')">8</button>
+                                    <button class="calc-btn number-btn" onclick="inputNumber('9')">9</button>
+                                    <button class="calc-btn operator-btn" onclick="inputOperator('*')">×</button>
+                                </div>
+                                
+                                <div class="button-row">
+                                    <button class="calc-btn number-btn" onclick="inputNumber('4')">4</button>
+                                    <button class="calc-btn number-btn" onclick="inputNumber('5')">5</button>
+                                    <button class="calc-btn number-btn" onclick="inputNumber('6')">6</button>
+                                    <button class="calc-btn operator-btn" onclick="inputOperator('-')">−</button>
+                                </div>
+                                
+                                <div class="button-row">
+                                    <button class="calc-btn number-btn" onclick="inputNumber('1')">1</button>
+                                    <button class="calc-btn number-btn" onclick="inputNumber('2')">2</button>
+                                    <button class="calc-btn number-btn" onclick="inputNumber('3')">3</button>
+                                    <button class="calc-btn operator-btn" onclick="inputOperator('+')">+</button>
+                                </div>
+                                
+                                <div class="button-row">
+                                    <button class="calc-btn special-btn" onclick="inputSquare()">x²</button>
+                                    <button class="calc-btn number-btn" onclick="inputNumber('0')">0</button>
+                                    <button class="calc-btn number-btn" onclick="inputDecimal()">.</button>
+                                    <button class="calc-btn equals-btn" onclick="calculate()">=</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="calculator-buttons">
-                        <button class="span-two" data-all-clear>AC</button>
-                        <button data-delete>DEL</button>
-                        <button class="operator" data-operation>÷</button>
-                        <button data-number>1</button>
-                        <button data-number>2</button>
-                        <button data-number>3</button>
-                        <button class="operator" data-operation>×</button>
-                        <button data-number>4</button>
-                        <button data-number>5</button>
-                        <button data-number>6</button>
-                        <button class="operator" data-operation>+</button>
-                        <button data-number>7</button>
-                        <button data-number>8</button>
-                        <button data-number>9</button>
-                        <button class="operator" data-operation>-</button>
-                        <button data-number>.</button>
-                        <button data-number>0</button>
-                        <button class="span-two equals" data-equals>=</button>
+
+                    <!-- Calculation Steps -->
+                    <div class="sutra-card steps-card">
+                        <div class="sutra-header">
+                            <h3><i class="fas fa-list-ol"></i> Step-by-Step Vedic Solution</h3>
+                        </div>
+                        <div class="sutra-body">
+                            <div class="calculation-steps" id="calculationSteps">
+                                <div class="step-placeholder">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p>Perform a calculation to see Vedic math steps here!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="explanation-panel">
-                    <h3 id="explanation-title"></h3>
-                    <div id="explanation-content"></div>
+                <!-- Vedic Method Tools -->
+                <div class="vedic-tools">
+                    <div class="section-title">
+                        <h3>Specialized Vedic Calculators</h3>
+                        <p>Use these tools for specific Vedic mathematics techniques</p>
+                    </div>
+                    
+                    <div class="tools-grid">
+                        <div class="sutra-card tool-card">
+                            <div class="sutra-header">
+                                <h4><i class="fas fa-square"></i> Ekadhikena Purvena</h4>
+                            </div>
+                            <div class="sutra-body">
+                                <p><strong>For squaring numbers ending in 5</strong></p>
+                                <div class="tool-input">
+                                    <input type="text" id="squareInput" placeholder="e.g., 25, 35, 45" maxlength="3">
+                                    <button class="tool-btn" onclick="vedicSquareCalculation()">Calculate Square</button>
+                                </div>
+                                <div class="tool-result" id="squareResult"></div>
+                            </div>
+                        </div>
+
+                        <div class="sutra-card tool-card">
+                            <div class="sutra-header">
+                                <h4><i class="fas fa-minus"></i> Nikhilam Method</h4>
+                            </div>
+                            <div class="sutra-body">
+                                <p><strong>Subtraction from base numbers</strong></p>
+                                <div class="tool-input">
+                                    <select id="baseSelect">
+                                        <option value="10">From 10</option>
+                                        <option value="100">From 100</option>
+                                        <option value="1000">From 1000</option>
+                                        <option value="10000">From 10000</option>
+                                    </select>
+                                    <input type="number" id="subtractInput" placeholder="Number to subtract">
+                                    <button class="tool-btn" onclick="vedicSubtractionCalculation()">Calculate</button>
+                                </div>
+                                <div class="tool-result" id="subtractResult"></div>
+                            </div>
+                        </div>
+
+                        <div class="sutra-card tool-card">
+                            <div class="sutra-header">
+                                <h4><i class="fas fa-times"></i> Urdhva-Tiryagbyham</h4>
+                            </div>
+                            <div class="sutra-body">
+                                <p><strong>Crosswise multiplication method</strong></p>
+                                <div class="tool-input">
+                                    <input type="number" id="multiply1" placeholder="First number" max="999">
+                                    <input type="number" id="multiply2" placeholder="Second number" max="999">
+                                    <button class="tool-btn" onclick="vedicMultiplicationCalculation()">Multiply</button>
+                                </div>
+                                <div class="tool-result" id="multiplyResult"></div>
+                            </div>
+                        </div>
+
+                        <div class="sutra-card tool-card">
+                            <div class="sutra-header">
+                                <h4><i class="fas fa-divide"></i> Paravartya Yojayet</h4>
+                            </div>
+                            <div class="sutra-body">
+                                <p><strong>Vedic division method</strong></p>
+                                <div class="tool-input">
+                                    <input type="number" id="dividend" placeholder="Dividend">
+                                    <input type="number" id="divisor" placeholder="Divisor">
+                                    <button class="tool-btn" onclick="vedicDivisionCalculation()">Divide</button>
+                                </div>
+                                <div class="tool-result" id="divisionResult"></div>
+                            </div>
+                        </div>
+
+                        <div class="sutra-card tool-card">
+                            <div class="sutra-header">
+                                <h4><i class="fas fa-percentage"></i> Duplex Method</h4>
+                            </div>
+                            <div class="sutra-body">
+                                <p><strong>For special multiplication patterns</strong></p>
+                                <div class="tool-input">
+                                    <input type="text" id="duplexInput" placeholder="e.g., 11, 101, 111" maxlength="4">
+                                    <input type="number" id="duplexMultiplier" placeholder="Multiply by" max="9999">
+                                    <button class="tool-btn" onclick="duplexCalculation()">Calculate</button>
+                                </div>
+                                <div class="tool-result" id="duplexResult"></div>
+                            </div>
+                        </div>
+
+                        <div class="sutra-card tool-card">
+                            <div class="sutra-header">
+                                <h4><i class="fas fa-calculator"></i> Vinculum Numbers</h4>
+                            </div>
+                            <div class="sutra-body">
+                                <p><strong>Working with bar numbers</strong></p>
+                                <div class="tool-input">
+                                    <input type="number" id="vinculumInput" placeholder="Enter number">
+                                    <button class="tool-btn" onclick="vinculumConversion()">Convert to Vinculum</button>
+                                </div>
+                                <div class="tool-result" id="vinculumResult"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
-    
+
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -347,193 +229,797 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="formulas.html">Formulas</a></li>
-                        <li><a href="game.html">Games</a></li>
-                        <li><a href="cal.html">Calculator</a></li>
+                        <li><a href="games.html">Games</a></li>
+                        <li><a href="calculator.html">Calculator</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </footer>
-    
+
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .calculator-card {
+            position: sticky;
+            top: 20px;
+        }
+
+        .calculator-display {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .display-screen {
+            font-size: 28px;
+            font-weight: 600;
+            text-align: right;
+            min-height: 40px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .calculation-history {
+            font-size: 14px;
+            color: #bdc3c7;
+            margin-top: 10px;
+            min-height: 20px;
+            text-align: right;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            gap: 10px;
+        }
+
+        .button-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calc-btn {
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .number-btn {
+            background: white;
+            color: #2c3e50;
+            border: 2px solid #e1e8ed;
+        }
+
+        .number-btn:hover {
+            background: #f8f9ff;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .operator-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .operator-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .function-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .function-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .equals-btn {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+
+        .equals-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .special-btn {
+            background: #f39c12;
+            color: white;
+        }
+
+        .special-btn:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .calculation-steps {
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .step-placeholder {
+            text-align: center;
+            padding: 50px 20px;
+            color: #7f8c8d;
+        }
+
+        .step-placeholder i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+
+        .calculation-step {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-description {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .step-calculation {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border: 1px solid #e1e8ed;
+            line-height: 1.5;
+        }
+
+        .vedic-tools {
+            margin-top: 50px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .tool-card {
+            transition: all 0.3s ease;
+            border: 2px solid #e1e8ed;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .tool-input {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .tool-input input,
+        .tool-input select {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .tool-input input:focus,
+        .tool-input select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .tool-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .tool-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tool-result {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-top: 15px;
+            min-height: 20px;
+            font-size: 14px;
+        }
+
+        .result-highlight {
+            font-weight: 600;
+            color: #27ae60;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .vedic-step {
+            background: #ecf0f1;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-card {
+                position: static;
+            }
+
+            .calc-btn {
+                padding: 15px;
+                font-size: 16px;
+            }
+
+            .display-screen {
+                font-size: 24px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-input {
+                flex-direction: column;
+            }
+
+            .tool-input input,
+            .tool-input select {
+                min-width: auto;
+            }
+        }
+    </style>
+
     <script>
-        
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
-        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+        // Calculator state
+        let currentInput = '0';
+        let previousInput = null;
+        let operator = null;
+        let waitingForNewOperand = false;
 
-        
-        class Calculator {
-            constructor(previousOperandTextElement, currentOperandTextElement) {
-                this.previousOperandTextElement = previousOperandTextElement;
-                this.currentOperandTextElement = currentOperandTextElement;
-                this.explanationPanel = document.getElementById('explanation-panel');
-                this.explanationTitle = document.getElementById('explanation-title');
-                this.explanationContent = document.getElementById('explanation-content');
-                this.clear();
+        // Initialize display
+        function updateDisplay() {
+            document.getElementById('display').textContent = currentInput;
+        }
+
+        function updateHistory(calculation) {
+            const historyElement = document.getElementById('history');
+            historyElement.textContent = calculation;
+        }
+
+        // Basic calculator functions
+        function inputNumber(num) {
+            if (waitingForNewOperand) {
+                currentInput = num;
+                waitingForNewOperand = false;
+            } else {
+                currentInput = currentInput === '0' ? num : currentInput + num;
+            }
+            updateDisplay();
+        }
+
+        function inputDecimal() {
+            if (waitingForNewOperand) {
+                currentInput = '0.';
+                waitingForNewOperand = false;
+            } else if (currentInput.indexOf('.') === -1) {
+                currentInput += '.';
+            }
+            updateDisplay();
+        }
+
+        function inputOperator(nextOperator) {
+            const inputValue = parseFloat(currentInput);
+
+            if (previousInput === null) {
+                previousInput = inputValue;
+            } else if (operator) {
+                const result = performCalculation(previousInput, inputValue, operator);
+                currentInput = String(result);
+                previousInput = result;
+                updateDisplay();
             }
 
-            clear() {
-                this.currentOperand = '';
-                this.previousOperand = '';
-                this.operation = undefined;
-                this.explanationPanel.style.display = 'none';
-            }
+            waitingForNewOperand = true;
+            operator = nextOperator;
+            updateHistory(`${previousInput} ${getOperatorSymbol(nextOperator)}`);
+        }
 
-            delete() {
-                this.currentOperand = this.currentOperand.toString().slice(0, -1);
-            }
-
-            appendNumber(number) {
-                if (number === '.' && this.currentOperand.includes('.')) return;
-                this.currentOperand = this.currentOperand.toString() + number.toString();
-            }
-
-            chooseOperation(operation) {
-                if (this.currentOperand === '') return;
-                if (this.previousOperand !== '') {
-                    this.compute();
-                }
-                this.operation = operation;
-                this.previousOperand = this.currentOperand;
-                this.currentOperand = '';
-            }
-            
-            vedicMultiply(num1Str, num2Str) {
-            
-                if (num1Str.length === 2 && num2Str.length === 2) {
-                    const a = parseInt(num1Str[0]);
-                    const b = parseInt(num1Str[1]);
-                    const c = parseInt(num2Str[0]);
-                    const d = parseInt(num2Str[1]);
-
-                    const step1_val = b * d;
-                    const step2_val = (a * d) + (b * c);
-                    const step3_val = a * c;
-
-                    const right = step1_val % 10;
-                    const carry1 = Math.floor(step1_val / 10);
-                    
-                    const middle_sum = step2_val + carry1;
-                    const middle = middle_sum % 10;
-                    const carry2 = Math.floor(middle_sum / 10);
-
-                    const left = step3_val + carry2;
-                    
-                    const result = parseInt(`${left}${middle}${right}`);
-
-                    
-                    this.explanationTitle.innerText = `Vedic Method: ${num1Str} × ${num2Str} (Urdhva Tiryagbhyam)`;
-                    this.explanationContent.innerHTML = `
-                        <p>This multiplication uses the 'Vertically and Crosswise' method.</p>
-                        <p><b>Step 1 (Vertically Right):</b> Multiply the right-most digits. <code>${b} × ${d} = ${step1_val}</code>. Write down <code>${right}</code> and carry over <code>${carry1}</code>.</p>
-                        <p><b>Step 2 (Crosswise):</b> Multiply diagonally and add. <code>(${a}×${d}) + (${b}×${c}) = ${a*d} + ${b*c} = ${step2_val}</code>. Add carry-over: <code>${step2_val} + ${carry1} = ${middle_sum}</code>. Write down <code>${middle}</code> and carry over <code>${carry2}</code>.</p>
-                        <p><b>Step 3 (Vertically Left):</b> Multiply the left-most digits. <code>${a} × ${c} = ${step3_val}</code>. Add carry-over: <code>${step3_val} + ${carry2} = ${left}</code>.</p>
-                        <p><b>Result:</b> Combining the digits from left to right gives <code>${result}</code>.</p>
-                    `;
-                    this.explanationPanel.style.display = 'block';
-
-                    return result;
-                }
-                
-                this.explanationPanel.style.display = 'none';
-                return parseFloat(num1Str) * parseFloat(num2Str);
-            }
-
-            compute() {
-                let computation;
-                const prev = parseFloat(this.previousOperand);
-                const current = parseFloat(this.currentOperand);
-                if (isNaN(prev) || isNaN(current)) return;
-
-                switch (this.operation) {
-                    case '+':
-                        computation = prev + current;
-                        this.explanationPanel.style.display = 'none';
-                        break;
-                    case '-':
-                        computation = prev - current;
-                        this.explanationPanel.style.display = 'none';
-                        break;
-                    case '×':
-                        computation = this.vedicMultiply(this.previousOperand, this.currentOperand);
-                        break;
-                    case '÷':
-                        computation = prev / current;
-                        this.explanationPanel.style.display = 'none';
-                        break;
-                    default:
-                        return;
-                }
-                this.currentOperand = computation;
-                this.operation = undefined;
-                this.previousOperand = '';
-            }
-
-            getDisplayNumber(number) {
-                const stringNumber = number.toString();
-                const integerDigits = parseFloat(stringNumber.split('.')[0]);
-                const decimalDigits = stringNumber.split('.')[1];
-                let integerDisplay;
-                if (isNaN(integerDigits)) {
-                    integerDisplay = '';
-                } else {
-                    integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 });
-                }
-                if (decimalDigits != null) {
-                    return `${integerDisplay}.${decimalDigits}`;
-                } else {
-                    return integerDisplay;
-                }
-            }
-
-            updateDisplay() {
-                this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
-                if (this.operation != null) {
-                    this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
-                } else {
-                    this.previousOperandTextElement.innerText = '';
-                }
+        function performCalculation(firstOperand, secondOperand, operator) {
+            switch (operator) {
+                case '+': return firstOperand + secondOperand;
+                case '-': return firstOperand - secondOperand;
+                case '*': return firstOperand * secondOperand;
+                case '/': return secondOperand !== 0 ? firstOperand / secondOperand : 0;
+                default: return secondOperand;
             }
         }
 
-        const numberButtons = document.querySelectorAll('[data-number]');
-        const operationButtons = document.querySelectorAll('[data-operation]');
-        const equalsButton = document.querySelector('[data-equals]');
-        const deleteButton = document.querySelector('[data-delete]');
-        const allClearButton = document.querySelector('[data-all-clear]');
-        const previousOperandTextElement = document.querySelector('[data-previous-operand]');
-        const currentOperandTextElement = document.querySelector('[data-current-operand]');
+        function getOperatorSymbol(op) {
+            const symbols = {'+': '+', '-': '−', '*': '×', '/': '÷'};
+            return symbols[op] || op;
+        }
 
-        const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
+        function calculate() {
+            const inputValue = parseFloat(currentInput);
+            
+            if (previousInput !== null && operator) {
+                const result = performCalculation(previousInput, inputValue, operator);
+                
+                // Show Vedic calculation steps
+                showVedicCalculationSteps(previousInput, inputValue, operator, result);
+                
+                currentInput = String(result);
+                updateDisplay();
+                updateHistory(`${previousInput} ${getOperatorSymbol(operator)} ${inputValue} = ${result}`);
+                
+                previousInput = null;
+                operator = null;
+                waitingForNewOperand = true;
+            }
+        }
 
-        numberButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                calculator.appendNumber(button.innerText);
-                calculator.updateDisplay();
-            });
-        });
+        function inputSquare() {
+            const value = parseFloat(currentInput);
+            const result = value * value;
+            
+            showVedicSquareSteps(value, result);
+            
+            currentInput = String(result);
+            updateDisplay();
+            updateHistory(`${value}² = ${result}`);
+            waitingForNewOperand = true;
+        }
 
-        operationButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                calculator.chooseOperation(button.innerText);
-                calculator.updateDisplay();
-            });
-        });
+        function clearAll() {
+            currentInput = '0';
+            previousInput = null;
+            operator = null;
+            waitingForNewOperand = false;
+            updateDisplay();
+            updateHistory('');
+            clearSteps();
+        }
 
-        equalsButton.addEventListener('click', button => {
-            calculator.compute();
-            calculator.updateDisplay();
-        });
+        function clearEntry() {
+            currentInput = '0';
+            updateDisplay();
+        }
 
-        allClearButton.addEventListener('click', button => {
-            calculator.clear();
-            calculator.updateDisplay();
-        });
+        function backspace() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
 
-        deleteButton.addEventListener('click', button => {
-            calculator.delete();
-            calculator.updateDisplay();
-        });
+        // Vedic calculation methods
+        function showVedicCalculationSteps(num1, num2, op, result) {
+            const stepsContainer = document.getElementById('calculationSteps');
+            let stepsHtml = '';
+
+            switch (op) {
+                case '*':
+                    stepsHtml = generateMultiplicationSteps(num1, num2, result);
+                    break;
+                case '-':
+                    stepsHtml = generateSubtractionSteps(num1, num2, result);
+                    break;
+                case '+':
+                    stepsHtml = generateAdditionSteps(num1, num2, result);
+                    break;
+                case '/':
+                    stepsHtml = generateDivisionSteps(num1, num2, result);
+                    break;
+                default:
+                    stepsHtml = `
+                        <div class="calculation-step">
+                            <div class="step-title">Basic Calculation</div>
+                            <div class="step-calculation">${num1} ${getOperatorSymbol(op)} ${num2} = ${result}</div>
+                        </div>
+                    `;
+            }
+            
+            stepsContainer.innerHTML = stepsHtml;
+        }
+
+        function generateMultiplicationSteps(num1, num2, result) {
+            const int1 = Math.floor(num1);
+            const int2 = Math.floor(num2);
+            
+            if (int1 >= 10 && int1 <= 99 && int2 >= 10 && int2 <= 99) {
+                return generateUrdhvaTiryagbhyamSteps(int1, int2, result);
+            } else {
+                return `
+                    <div class="calculation-step">
+                        <div class="step-title"><i class="fas fa-times"></i> Basic Multiplication</div>
+                        <div class="step-description">Standard multiplication method</div>
+                        <div class="step-calculation">${num1} × ${num2} = ${result}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function generateUrdhvaTiryagbhyamSteps(num1, num2, result) {
+            const a = Math.floor(num1 / 10);
+            const b = num1 % 10;
+            const c = Math.floor(num2 / 10);
+            const d = num2 % 10;
+            
+            const step1 = d * b;
+            const step2 = (a * d) + (b * c);
+            const step3 = a * c;
+            
+            const carry1 = Math.floor(step1 / 10);
+            const digit1 = step1 % 10;
+            const tempStep2 = step2 + carry1;
+            const carry2 = Math.floor(tempStep2 / 10);
+            const digit2 = tempStep2 % 10;
+            const digit3 = step3 + carry2;
+
+            return `
+                <div class="calculation-step">
+                    <div class="step-title"><i class="fas fa-times"></i> Urdhva-Tiryagbyham Method</div>
+                    <div class="step-description">"Vertically and Crosswise" - ${num1} × ${num2}</div>
+                    <div class="step-calculation">
+                        Step 1 (Units): ${b} × ${d} = ${step1}<br>
+                        Step 2 (Tens): (${a} × ${d}) + (${b} × ${c}) = ${a*d} + ${b*c} = ${step2}<br>
+                        Step 3 (Hundreds): ${a} × ${c} = ${step3}<br><br>
+                        Arranging with carries:<br>
+                        Units digit: ${digit1}<br>
+                        Tens digit: ${digit2}<br>
+                        Hundreds: ${digit3}<br><br>
+                        Final Result: ${result}
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateSubtractionSteps(num1, num2, result) {
+            if ([10, 100, 1000, 10000].includes(num1)) {
+                return generateNikhilamSteps(num1, num2, result);
+            } else {
+                return `
+                    <div class="calculation-step">
+                        <div class="step-title"><i class="fas fa-minus"></i> Basic Subtraction</div>
+                        <div class="step-calculation">${num1} - ${num2} = ${result}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function generateNikhilamSteps(base, num, result) {
+            const numStr = num.toString().padStart(base.toString().length - 1, '0');
+            let steps = '';
+            let resultDigits = [];
+            
+            for (let i = 0; i < numStr.length - 1; i++) {
+                const complement = 9 - parseInt(numStr[i]);
+                resultDigits.push(complement);
+                steps += `9 - ${numStr[i]} = ${complement}<br>`;
+            }
+            
+            const lastComplement = 10 - parseInt(numStr[numStr.length - 1]);
+            resultDigits.push(lastComplement);
+            steps += `10 - ${numStr[numStr.length - 1]} = ${lastComplement}`;
+
+            return `
+                <div class="calculation-step">
+                    <div class="step-title"><i class="fas fa-minus"></i> Nikhilam Navatashcaramam Dashatah</div>
+                    <div class="step-description">"All from 9 and last from 10" - ${base} - ${num}</div>
+                    <div class="step-calculation">
+                        ${steps}<br><br>
+                        Result: ${result}
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateAdditionSteps(num1, num2, result) {
+            return `
+                <div class="calculation-step">
+                    <div class="step-title"><i class="fas fa-plus"></i> Addition</div>
+                    <div class="step-description">Standard addition method</div>
+                    <div class="step-calculation">${num1} + ${num2} = ${result}</div>
+                </div>
+            `;
+        }
+
+        function generateDivisionSteps(num1, num2, result) {
+            return `
+                <div class="calculation-step">
+                    <div class="step-title"><i class="fas fa-divide"></i> Division</div>
+                    <div class="step-description">Standard division method</div>
+                    <div class="step-calculation">${num1} ÷ ${num2} = ${result}</div>
+                </div>
+            `;
+        }
+
+        function showVedicSquareSteps(num, result) {
+            const stepsContainer = document.getElementById('calculationSteps');
+            const numStr = num.toString();
+            
+            if (numStr.endsWith('5') && !numStr.includes('.')) {
+                const beforeFive = Math.floor(num / 10);
+                const step1 = beforeFive * (beforeFive + 1);
+                
+                stepsContainer.innerHTML = `
+                    <div class="calculation-step">
+                        <div class="step-title"><i class="fas fa-square"></i> Ekadhikena Purvena Method</div>
+                        <div class="step-description">"By one more than the previous one" - ${num}²</div>
+                        <div class="step-calculation">
+                            Step 1: Digits before 5: ${beforeFive}<br>
+                            Step 2: Multiply by (one more): ${beforeFive} × ${beforeFive + 1} = ${step1}<br>
+                            Step 3: Append 25: ${step1}25<br><br>
+                            Result: ${result}
+                        </div>
+                    </div>
+                `;
+            } else {
+                stepsContainer.innerHTML = `
+                    <div class="calculation-step">
+                        <div class="step-title"><i class="fas fa-square"></i> Standard Squaring</div>
+                        <div class="step-calculation">${num} × ${num} = ${result}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function clearSteps() {
+            document.getElementById('calculationSteps').innerHTML = `
+                <div class="step-placeholder">
+                    <i class="fas fa-lightbulb"></i>
+                    <p>Perform a calculation to see Vedic math steps here!</p>
+                </div>
+            `;
+        }
+
+        // Specialized Vedic calculator functions
+        function vedicSquareCalculation() {
+            const input = document.getElementById('squareInput').value;
+            const resultDiv = document.getElementById('squareResult');
+            
+            if (!input || !input.match(/^\d*5$/)) {
+                resultDiv.innerHTML = '<p class="error-message">Please enter a valid number ending in 5 (e.g., 15, 25, 35)</p>';
+                return;
+            }
+            
+            const num = parseInt(input);
+            const beforeFive = Math.floor(num / 10);
+            const step1 = beforeFive * (beforeFive + 1);
+            const result = parseInt(step1.toString() + '25');
+            
+            resultDiv.innerHTML = `
+                <div class="result-highlight">${num}² = ${result}</div>
+                <p><strong>Ekadhikena Purvena Steps:</strong></p>
+                <div class="vedic-step">1. Take digits before 5: ${beforeFive}</div>
+                <div class="vedic-step">2. Multiply by one more: ${beforeFive} × ${beforeFive + 1} = ${step1}</div>
+                <div class="vedic-step">3. Append 25: ${step1}25 = ${result}</div>
+                <p><em>This method works because (10a + 5)² = 100a(a+1) + 25</em></p>
+            `;
+        }
+
+        function vedicSubtractionCalculation() {
+            const base = parseInt(document.getElementById('baseSelect').value);
+            const num = parseInt(document.getElementById('subtractInput').value);
+            const resultDiv = document.getElementById('subtractResult');
+            
+            if (!num || num >= base || num < 0) {
+                resultDiv.innerHTML = '<p class="error-message">Enter a valid positive number less than the base</p>';
+                return;
+            }
+            
+            const result = base - num;
+            const baseLength = base.toString().length - 1;
+            const numStr = num.toString().padStart(baseLength, '0');
+            
+            let steps = '';
+            let calculation = '';
+            
+            for (let i = 0; i < numStr.length - 1; i++) {
+                const complement = 9 - parseInt(numStr[i]);
+                steps += `<div class="vedic-step">9 - ${numStr[i]} = ${complement}</div>`;
+                calculation += complement;
+            }
+            
+            const lastComplement = 10 - parseInt(numStr[numStr.length - 1]);
+            steps += `<div class="vedic-step">10 - ${numStr[numStr.length - 1]} = ${lastComplement}</div>`;
+            calculation += lastComplement;
+            
+            resultDiv.innerHTML = `
+                <div class="result-highlight">${base} - ${num} = ${result}</div>
+                <p><strong>Nikhilam Method:</strong></p>
+                <p>"All from 9 and last from 10"</p>
+                ${steps}
+                <div class="vedic-step">Result: ${calculation} = ${result}</div>
+            `;
+        }
+
+        function vedicMultiplicationCalculation() {
+            const num1 = parseInt(document.getElementById('multiply1').value);
+            const num2 = parseInt(document.getElementById('multiply2').value);
+            const resultDiv = document.getElementById('multiplyResult');
+            
+            if (!num1 || !num2 || num1 < 10 || num1 > 99 || num2 < 10 || num2 > 99) {
+                resultDiv.innerHTML = '<p class="error-message">Enter two valid 2-digit numbers (10-99)</p>';
+                return;
+            }
+            
+            const result = num1 * num2;
+            const a = Math.floor(num1 / 10);
+            const b = num1 % 10;
+            const c = Math.floor(num2 / 10);
+            const d = num2 % 10;
+            
+            const vertical1 = b * d;
+            const crosswise = (a * d) + (b * c);
+            const vertical2 = a * c;
+            
+            resultDiv.innerHTML = `
+                <div class="result-highlight">${num1} × ${num2} = ${result}</div>
+                <p><strong>Urdhva-Tiryagbyham Method:</strong></p>
+                <p>"Vertically and Crosswise"</p>
+                <div class="vedic-step">Units place (vertical): ${b} × ${d} = ${vertical1}</div>
+                <div class="vedic-step">Tens place (crosswise): (${a} × ${d}) + (${b} × ${c}) = ${crosswise}</div>
+                <div class="vedic-step">Hundreds place (vertical): ${a} × ${c} = ${vertical2}</div>
+                <div class="vedic-step">Combine with carries: ${vertical2}${crosswise}${vertical1} → ${result}</div>
+            `;
+        }
+
+        function vedicDivisionCalculation() {
+            const dividend = parseInt(document.getElementById('dividend').value);
+            const divisor = parseInt(document.getElementById('divisor').value);
+            const resultDiv = document.getElementById('divisionResult');
+            
+            if (!dividend || !divisor || divisor === 0) {
+                resultDiv.innerHTML = '<p class="error-message">Enter valid dividend and non-zero divisor</p>';
+                return;
+            }
+            
+            const quotient = Math.floor(dividend / divisor);
+            const remainder = dividend % divisor;
+            
+            resultDiv.innerHTML = `
+                <div class="result-highlight">${dividend} ÷ ${divisor} = ${quotient} R ${remainder}</div>
+                <p><strong>Paravartya Yojayet Method:</strong></p>
+                <p>"Transpose and Apply"</p>
+                <div class="vedic-step">Quotient: ${quotient}</div>
+                <div class="vedic-step">Remainder: ${remainder}</div>
+                <div class="vedic-step">Verification: ${quotient} × ${divisor} + ${remainder} = ${quotient * divisor + remainder}</div>
+            `;
+        }
+
+        function duplexCalculation() {
+            const pattern = document.getElementById('duplexInput').value;
+            const multiplier = parseInt(document.getElementById('duplexMultiplier').value);
+            const resultDiv = document.getElementById('duplexResult');
+            
+            if (!pattern || !multiplier || !pattern.match(/^1+$/)) {
+                resultDiv.innerHTML = '<p class="error-message">Enter a valid pattern of 1s (e.g., 11, 111, 1111) and multiplier</p>';
+                return;
+            }
+            
+            const patternNum = parseInt(pattern);
+            const result = patternNum * multiplier;
+            
+            resultDiv.innerHTML = `
+                <div class="result-highlight">${pattern} × ${multiplier} = ${result}</div>
+                <p><strong>Duplex Method for patterns of 1s:</strong></p>
+                <div class="vedic-step">Pattern: ${pattern} (${pattern.length} ones)</div>
+                <div class="vedic-step">Multiplier: ${multiplier}</div>
+                <div class="vedic-step">Each 1 contributes: ${multiplier}</div>
+                <div class="vedic-step">Result follows the pattern of the multiplier</div>
+            `;
+        }
+
+        function vinculumConversion() {
+            const num = parseInt(document.getElementById('vinculumInput').value);
+            const resultDiv = document.getElementById('vinculumResult');
+            
+            if (!num) {
+                resultDiv.innerHTML = '<p class="error-message">Enter a valid number</p>';
+                return;
+            }
+            
+            // Simple vinculum conversion for demonstration
+            const numStr = num.toString();
+            let vinculumForm = '';
+            let hasVinculum = false;
+            
+            for (let i = 0; i < numStr.length; i++) {
+                const digit = parseInt(numStr[i]);
+                if (digit >= 6) {
+                    vinculumForm += (10 - digit).toString() + '̄';
+                    hasVinculum = true;
+                } else {
+                    vinculumForm += digit.toString();
+                }
+            }
+            
+            resultDiv.innerHTML = `
+                <div class="result-highlight">Vinculum form of ${num}:</div>
+                <p><strong>${hasVinculum ? vinculumForm : 'No vinculum needed'}</strong></p>
+                <p><strong>Vinculum Numbers:</strong></p>
+                <div class="vedic-step">Replace digits ≥ 6 with (10-digit) and bar notation</div>
+                <div class="vedic-step">This simplifies calculations by reducing large digits</div>
+                ${hasVinculum ? '<div class="vedic-step">̄ denotes negative (bar) digit</div>' : ''}
+            `;
+        }
+
+        // Initialize
+        updateDisplay();
     </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
